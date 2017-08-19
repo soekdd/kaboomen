@@ -1,0 +1,22 @@
+{
+  "name": "kaboomen_server",
+  "version": "1.0.0",
+  "description": "Kaboomen Server Component",
+  "main": "server.js",
+  "directories": {
+    "common_lib": "common_lib"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3",
+    "winston": "^2.2.0",
+    "winston-color": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Soeren Kahl",
+  "license": "ISC"
+}

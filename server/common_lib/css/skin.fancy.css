@@ -1,0 +1,49 @@
+.fancy .sequence-diagram .participant {
+  background-color: transparent;
+}
+.fancy .sequence-diagram .participant:nth-child(1) {
+  border-color: #007089;
+  background-color: #0095b6;
+  color: #004a5b;
+}
+.fancy .sequence-diagram .participant:nth-child(2) {
+  border-color: #bf8b00;
+  background-color: #ffba00;
+  color: #805d00;
+  width: 160px;
+  text-align: center;
+  margin-left: 8px;
+}
+.fancy .sequence-diagram .participant:nth-child(3) {
+  border-color: #e6c52f;
+  background-color: #f0dc82;
+  color: #a58b14;
+  margin-left: 8px;
+}
+.fancy .sequence-diagram .participant {
+  border-radius: 4px;
+  font-weight: bold;
+}
+.fancy .sequence-diagram .occurrence {
+  border-radius: 4px;
+  background-color: #e6e6e6;
+  border-color: #bfbfbf;
+}
+.fancy .sequence-diagram .lifeline .line {
+  margin-left: 49%;
+  border-left: dotted 5px #8fbf00;
+}
+.fancy .sequence-diagram .message svg.arrow line,
+.fancy .sequence-diagram .message svg.arrow polyline {
+  stroke-width: 3px;
+}
+.fancy .sequence-diagram .message svg.arrow line,
+.fancy .sequence-diagram .message svg.arrow polyline {
+  stroke: #8cc84b;
+}
+.fancy .sequence-diagram .message svg.arrow polyline.head,
+.fancy .sequence-diagram .message svg.arrow polyline.closed,
+.fancy .sequence-diagram .message.self svg.arrow polyline.head {
+  stroke: #8cc84b;
+  fill: #8cc84b;
+}
