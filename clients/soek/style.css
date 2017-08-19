@@ -1,0 +1,392 @@
+body {
+    font-family: Lato, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.indest {
+    filter: drop-shadow(0px 0px 2px rgba(100,255,100,1));
+}
+
+.tile {
+    width: 33px;
+    height: 33px;
+    position: absolute
+}
+
+.timer {
+    
+}
+
+.award {
+    width: 22px;
+    height: 22px;
+    margin: -2px;
+    display:inline-block;
+    background: url(img/goodie.png);
+    background-position:0px 0px;
+    background-size:1000%;
+}
+
+.men {
+    position: absolute;
+    z-index:20;
+    clip: rect(0px, 24px, 32px, 0px);
+}
+
+.audioControl {
+    position: absolute;
+    width:25px;
+    background: url(img/symbols.png);
+    background-position:0px 0px;
+    background-size:200%;
+    height:25px;
+    right:0px;
+    top:0px;
+}
+
+.goodies {
+    width:33px;
+    height:33px;
+    background: url(img/goodie.png);
+    background-position:0px 0px;
+    background-size:1000%;
+}
+
+.bombs {
+    position: absolute;
+    clip: rect(0px, 33px, 33px, 0px);
+}
+
+.explh {
+    border: 0px;
+    height: 33px;
+    position: absolute;
+    background: url(img/explh.png) repeat-x;
+}
+
+.explv {
+    border: 0px;
+    width: 33px;
+    position: absolute;
+    background: url(img/explv.png) repeat-y;
+}
+
+.exple {
+    position: absolute;
+    clip: rect(0px, 33px, 33px, 0px);
+}
+
+.blueh {
+    border: 0px;
+    height: 33px;
+    position: absolute;
+    background: url(img/blueh.png) repeat-x;
+}
+
+.bluev {
+    border: 0px;
+    width: 33px;
+    position: absolute;
+    background: url(img/bluev.png) repeat-y;
+}
+
+.name {
+    position: absolute;
+    color: #ffffff;
+    opacity: 0.5
+}
+
+@keyframes bombani {
+    100% {background-position-x:calc(4*-33px);transform:rotate(10deg) scale(1.1);}
+}
+
+.bomb {
+    width:33px;
+    height:33px;
+    background: url(img/bomb.png);
+    background-size: 400%;
+    background-position:0px 0px;
+    animation: bombani 0.5s steps(4) infinite;
+    animation-direction: alternate;
+    transform:rotate(-10deg);
+    font-size: 24px;
+    z-index:10;
+    text-align:center;
+    position: absolute;
+    color: #ff0000;
+}
+
+.count {
+    font-size: 16px;
+    z-index:21;
+    position: absolute;
+    color: #ffffff;
+}
+
+.bNormal {
+    background-position-y:33px;
+}
+
+.bStrong {
+    background-position-y:0px;
+}
+
+.bRemote {
+    background-position-y:calc(3*33px);
+}
+
+.bRed {
+    background-position-y:calc(2*33px);
+}
+
+
+.wall {
+    width:33px;
+    height:33px;
+    background: url(img/ground.png);
+    background-position:0px 0px;
+    background-size:2000%;
+}
+
+.ground {
+    width:33px;
+    height:33px;
+    background: url(img/ground.png);
+    background-position-y:33px;
+    background-position:0px 33px;
+    background-size:2000%;
+}
+
+.box {
+    width:33px;
+    height:33px;
+    background: url(img/boxes.png);
+    background-position:0px 0px;
+    background-size:500%;
+}
+
+.bS3{
+    background-position-y:0;
+}
+
+.bS1{
+    background-position-y:33px;
+}
+
+.bS2{
+    background-position-y:calc(2*33px);
+}
+
+.audioOff, .bV1{
+    background-position-x:0;
+}
+
+.audioOn, .bV2{
+    background-position-x:-100%;
+}
+
+.bV3{
+    background-position-x:-200%;
+}
+
+.bV4{
+    background-position-x:-300%;
+}
+
+.bV5{
+    background-position-x:-400%;
+}
+
+.bV6{
+    background-position-x:-500%;
+}
+
+.bV7{
+    background-position-x:-600%;
+}
+
+.bV8{
+    background-position-x:-700%;
+}
+
+.bV9{
+    background-position-x:-800%;
+}
+
+.bV10{
+    background-position-x:-900%;
+}
+
+
+.bV11{
+    background-position-x:-1000%;
+}
+
+.bV12{
+    background-position-x:-1100%;
+}
+
+.bV13{
+    background-position-x:-1200%;
+}
+
+.bV14{
+    background-position-x:-1300%;
+}
+
+.bV15{
+    background-position-x:-1400%;
+}
+
+.bV16{
+    background-position-x:-1500%;
+}
+
+.bV17{
+    background-position-x:-1600%;
+}
+
+.bV18{
+    background-position-x:-1700%;
+}
+
+.bV19{
+    background-position-x:-1800%;
+}
+
+.bV20{
+    background-position-x:-1900%;
+}
+
+
+.main_center {
+    padding: 0;
+    margin: 0 auto auto auto;
+    position: relative;
+}
+
+.pMe {
+    color: white;
+}
+
+.pWinner {
+    color: yellow;
+}
+
+.chatName, .pOthers {
+    color: gray;
+}
+
+#navbar {
+    height: 66px;
+}
+
+#highScore {
+    position: absolute;
+    top: 66px;
+    left: 0px;
+    width: calc((100% - 1000px)/2);
+}
+
+#chat {
+    position: absolute;
+    top: 66px;
+    right: 0px;
+    width: calc((100% - 1000px)/2);
+}
+
+#newChat {
+    position: absolute;
+    right: 0;
+    width: calc(100% - 45px);
+}
+
+#control {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+}
+
+#playerPanel {
+    position: absolute;
+    vertical-align: top;
+    top: 28px;
+    right: 0px;
+    padding: 5px;
+    width: 500px;
+    height: 33px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: url(img/background_bl.svg);
+    background-size: 100%;
+/*    background-size: 33px 33px;
+    background-position: center 0px;*/
+}
+
+select,
+option,
+input {
+    background: #34495e; /*orignal*/
+    background: #E63d3d; /*red*/
+    background: #51BCC3; /*cyan*/
+    color: #fff;
+}
+
+.debug{
+    position:absolute;
+    top:650px
+}
+
+#debug, #json{
+    display:none;
+}
+
+#newPlayer {
+    width:152px;
+    margin-left:6px;
+}
+
+#login {
+    margin-top:4px;
+}
+
+.brand {
+    height:66px;
+}
+
+.explain .mapElement {
+    background-size:100% 100%;
+    min-width:33px;
+    min-height:33px;
+    display:inline-block;
+}
+
+.explain .menElement {
+    background-size:800% 500%;
+    min-width:33px;
+    min-height:33px;
+    display:inline-block;
+}
+
+.explain .tab {
+    display: inline-block;
+    width:150px;
+}
+
+.explain .inline {
+    display: inline-block;
+    vertical-align:top;
+    position: relative;
+    left: 0px;
+}
+
+.explain .comment {
+    opacity: 0.7;
+}

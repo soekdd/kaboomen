@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="common_lib/js/jquery.js"></script>
+	<script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+	<script type="text/javascript" src="common_lib/js/socket.io.js"></script>
+	<script type="text/javascript">var connectionType = "sockets";</script>
+	<script type="text/javascript" src="common_lib/js/kaboomen_ai.js"></script>
+	<script type="text/javascript" src="kaboomenBot.js"></script>	
+</head>
+
+<body onkeydown="keyCode(event)">
+	<div class="main_center" id="navbar">
+		<a href="http://kaboomen.de"><a href="http://kaboomen.de"><h1 style="padding-top:0px;margin-top:0px;vertical-align:top"><img class="brand" src="img/brand.png"><span style="vertical-align: super;color: white;margin-left: 20px;">BOT</span><span id="danger" style="vertical-align: super;color: red;margin-left: 20px;display:none">&nbsp;DANGER</span></h1></a></a>
+		<div id="control">Server:&nbsp;
+			<select id="servers"></select>
+		</div>
+		<div id="playerPanel" style="display:none">
+		</div>
+	</div>
+	<div id="highScore"></div>
+	<div class="main_center" id="game"></div>
+	<div class="debug">
+		<p id="json"></p>
+		<p id="debug0"></p>
+		<p id="debug1"></p>
+		<p id="debug2"></p>
+		<p id="debug3"></p>
+		<p id="resptime"></p>
+	</div>
+</body>
+
+</html>

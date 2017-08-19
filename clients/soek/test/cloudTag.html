@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery cloudTag.js Demo</title>
+    <style type="text/css">
+         .tagBall{width:800px;height:800px;margin:50px auto;position:relative;}
+        .tag{display:block;position:absolute;left:0px;top:0px;color:#000;text-decoration:none;font-size:15px;font-weight:bold;}
+        .tag:hover{border:1px solid #666;}
+    </style>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="cloudTag.js"></script>
+    <title></title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.tagBall').cloudTag({ballSize:100});
+        });
+    </script>
+</head>
+<body>
+<h1 style="margin-top:150px" align="center">jQuery cloudTag.js Demo</h1>
+<div class="tagBall">
+    <a class="tag" target="_blank" href="#"><img src="../img/bluec.png"/>item1</a>
+    <a class="tag" target="_blank" href="#">item2</a>
+    <a class="tag" target="_blank" href="#">item1</a>
+    <a class="tag" target="_blank" href="#">item2</a>
+    <a class="tag" target="_blank" href="#">item1</a>
+    <a class="tag" target="_blank" href="#">item2</a>
+    <a class="tag" target="_blank" href="#">item1</a>
+    <a class="tag" target="_blank" href="#">item2</a>
+    <a class="tag" target="_blank" href="#">item1</a>
+    <a class="tag" target="_blank" href="#">item2</a>
+    <a class="tag" target="_blank" href="#">item1</a>
+    <a class="tag" target="_blank" href="#">item2</a>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

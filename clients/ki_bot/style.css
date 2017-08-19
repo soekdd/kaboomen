@@ -1,0 +1,146 @@
+body {
+    font-family: Lato, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tile {
+    width: 33px;
+    height: 33px;
+    position: absolute
+}
+
+.award {
+    width: 22px;
+    height: 22px;
+    vertical-align: text-bottom;
+}
+
+.men {
+    position: absolute;
+    clip: rect(0px, 24px, 32px, 0px);
+}
+
+.bombs {
+    position: absolute;
+    clip: rect(0px, 33px, 33px, 0px);
+}
+
+.explh {
+    border: 0px;
+    height: 33px;
+    position: absolute;
+    background: url(img/explh.png) repeat-x;
+}
+
+.explv {
+    border: 0px;
+    width: 33px;
+    position: absolute;
+    background: url(img/explv.png) repeat-y;
+}
+
+.exple {
+    position: absolute;
+    clip: rect(0px, 33px, 33px, 0px);
+}
+
+.name {
+    position: absolute;
+    color: #ffffff;
+    opacity: 0.5
+}
+
+.count {
+    font-size: 24px;
+    position: absolute;
+    color: #ff0000
+}
+
+.main_center {
+    padding: 0;
+    margin: 0 auto auto auto;
+    position: relative;
+}
+
+.pMe {
+    color: yellow;
+}
+
+.pWinner {
+    color: red;
+}
+
+.pOthers {
+    color: gray;
+}
+
+#navbar {
+    height: 66px;
+    background: url(img/back.png);
+    background-size: 33px 33px;
+    background-position: center 0px;
+}
+
+#highScore {
+    position: absolute;
+    top: 66px;
+    left: 0px;
+    width: 300px;
+}
+
+#control {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+}
+
+#playerPanel {
+    position: absolute;
+    vertical-align: top;
+    top: 28px;
+    right: 0px;
+    padding: 5px;
+    width: 500px;
+    height: 33px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: url(img/back.png);
+    background-size: 33px 33px;
+    background-position: center 0px;
+}
+
+select,
+option,
+input {
+    background: #34495e;
+    color: #fff;
+}
+
+.debug{
+    position:absolute;
+    top:650px
+}
+
+#debug, #json{
+    display:inline;
+}
+
+#newPlayer {
+    width:152px;
+    margin-left:6px;
+}
+
+#login {
+    margin-top:4px;
+}
+
+img.brand {
+    height:66px;
+}
