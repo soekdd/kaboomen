@@ -51,6 +51,9 @@ and clients simultanly.
 Map elements and filters: 
 |value dec|value hex|meaning|kaboomen_consts.js name|
 |---------|---------|-------|-----------------------|
+|value dec|value hex|meaning|kaboomen_consts.js name|
+
+
 |0        |0x00     |floor  |MAP_FLOOR|
 |1        |0x01     |wall   |MAP_WALL|
 |3        |0x03     |bomb   |ITEM_BOMB|
