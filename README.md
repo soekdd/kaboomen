@@ -49,9 +49,9 @@ the values is explained in the common_lib/js/kaboomen_consts.js. This file is us
 and clients simultanly. 
 
 Map elements and filters: 
-|value dec|value hex|meaning|kaboomen_consts.js name|
+|value dec|value hex|meaning|kaboomenconsts.js name|
 |---------|---------|-------|-----------------------|
-|value dec|value hex|meaning|kaboomen_consts.js name|
+|value dec|value hex|meaning|kaboomenconsts.js name|
 
 
 |0        |0x00     |floor  |MAP_FLOOR|
