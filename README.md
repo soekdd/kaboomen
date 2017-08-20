@@ -1,4 +1,4 @@
-# kaboomen
+# kaboomen documentation
 Kaboomen is a school project to teach children's web technologies by programming a web client for a massive multiplayer online game. 
 
 ## install
