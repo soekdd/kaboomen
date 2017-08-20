@@ -1,93 +1,163 @@
-var events = require('events');
+let ini = require('ini');
+let events = require('events');
 events.EventEmitter.prototype._maxListeners = 100;
-var winston = require('winston');
-var util=require('util');
-var os = require('os');
+let winston = require('winston');
+let util = require('util');
+let os = require('os');
 require('colors');
 const fs = require('fs');
-const options = {
-  key: fs.readFileSync('/etc/apache2/ssl/key.pem'),
-  cert: fs.readFileSync('/etc/apache2/ssl/cert.pem')
+let http = require('http');
+let https = require('https');
+let socketIO = require('socket.io');
+let c = require('./common_lib/js/kaboomen_consts.js');
+let Game = require('./server_lib/game').Game;
+let misc = require('./server_lib/misc');
+
+let startMeasure = misc.cpuAverage();
+let httpServer = null;
+let httpsServer = null;
+let httpIO = null;
+let httpsIO = null;
+let defaultPort = 8081;
+let port = process.env.PORT || defaultPort;
+let level = process.env.LEVEL || 'manos';
+let iniFile = process.env.INIFILE || './config.ini';
+let game = null;
+let socket = null;
+let healthData = {};
+let lastLog = "";
+let test = "";
+let config = {
+	ports:{
+		http:null,
+		https:null
+	},
+	ssl:{
+		key:null,
+		cert:null
+	}
 };
-var httpServer = require('http').createServer(handleRequest);
-var httpsServer = require('https').createServer(options,handleRequest);
-var httpIO = require('socket.io').listen(httpServer);
-var httpsIO = require('socket.io').listen(httpsServer);
-var c = require('./common_lib/js/kaboomen_consts.js');
-var Game = require('./server_lib/game').Game;
-var misc = require('./server_lib/misc');
-var port = process.env.PORT || 8081;
-var level = process.env.LEVEL || 'manos';
-var game = null;
-var socket = null;
-var healthData = {};
-var lastLog = "";
-var test = "";
-var myCustomLevelsColors = {
+let myCustomLevelsColors = {
 	info: 'blue',
 	warn: 'green',
 	error: 'yellow',
-}; 
+};
 
-function main() {
+function enableLog() {
 	winston.remove(winston.transports.Console);
 	winston.add(winston.transports.Console, {
 		formatter: misc.customFileFormatter
 	});
 	winston.addColors(myCustomLevelsColors);
+	for (var i = 3; i >= 0; i--) {
+		console.log("\t\t\t\t\t   💣" + ('""""""').substring(0, i) + "\x1b[31m*");
+	}
+	for (i = 1; i < 4; i++) {
+		console.log("\t\t\t\t\t\x1b[33m" + ("   ").substr(0, 3 - i) + ("(((\x1b[31m💥\x1b[33m)))").substr(3 - i, 12 + 2 * i));
+	}
+	console.log(' __  __     ______     ______     ______     ______     __    __     ______     __   __   ' + "\n" 
+			 + '/\\ \\/ /    /\\  __ \\   /\\  == \\   /\\  __ \\   /\\  __ \\   /\\ "-./  \\   /\\  ___\\   /\\ "-.\\ \\  '.gray + "\n" 
+			 + '\\ \\  _"-.  \\ \\  __ \\  \\ \\  __<   \\ \\ \\/\\ \\  \\ \\ \\/\\ \\  \\ \\ \\-./\\ \\  \\ \\  __\\   \\ \\ \\-.  \\ '.red + "\n" 
+			 + ' \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_____\\  \\ \\_____\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\  \\ \\_\\\\"\\_\\'.magenta + "\n" 
+			 + '  \\/_/\\/_/   \\/_/\\/_/   \\/_____/   \\/_____/   \\/_____/   \\/_/  \\/_/   \\/_____/   \\/_/ \\/_/'.blue);
+	console.log('node-version: %s, V8-version: %s, %s: %s, %s CPUs', process.versions.node, process.versions.v8, os.platform(), os.release(), os.cpus().length);
+}
+
+function main() {
+	enableLog();
+	if (fs.existsSync(iniFile)) {
+		config = ini.parse(fs.readFileSync(iniFile, 'utf-8'));
+		winston.info("[server] config %s loaded", iniFile);
+	}
+	else
+		winston.warn("[server] no config loaded, run with default values");
+	httpServer = require('http').createServer(handleRequest);
+	httpIO = socketIO.listen(httpServer);
+	winston.info("[server] http server loaded");
+	let keyFile = config.ssl.key || '/etc/apache2/ssl/key.pem';
+	let certFile = config.ssl.cert || '/etc/apache2/ssl/cert.pem';
+
+	if (fs.existsSync(keyFile) && fs.existsSync(certFile)) {
+		const options = {
+			key: fs.readFileSync(keyFile),
+			cert: fs.readFileSync(certFile)
+		};
+		httpsServer = require('https').createServer(options, handleRequest);
+		httpsIO = socketIO.listen(httpsServer);
+		winston.info("[server] https server loaded");
+	}
+	else
+		winston.warn("[server] didnt load http server");
 	healthData = {
 		startTime: process.hrtime(),
 		avgTime: 0,
 		requestCount: 0
 	};
-	for (var i = 3; i >= 0; i--) {
-		console.log("\t\t\t\t\t   \uD83D\uDCA3" + ('""""""').substring(0, i) + "\x1b[31m*");
-	}
-	for (i = 1; i < 4; i++) {
-		console.log("\t\t\t\t\t\x1b[33m" + ("   ").substr(0, 3 - i) + ("(((\x1b[31m\uD83D\uDCA5\x1b[33m)))").substr(3 - i, 12 + 2 * i));
-	}
-	console.log(' __  __     ______     ______     ______     ______     __    __     ______     __   __   ' + "\n" + '/\\ \\/ /    /\\  __ \\   /\\  == \\   /\\  __ \\   /\\  __ \\   /\\ "-./  \\   /\\  ___\\   /\\ "-.\\ \\  '.gray + "\n" + '\\ \\  _"-.  \\ \\  __ \\  \\ \\  __<   \\ \\ \\/\\ \\  \\ \\ \\/\\ \\  \\ \\ \\-./\\ \\  \\ \\  __\\   \\ \\ \\-.  \\ '.red + "\n" + ' \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_____\\  \\ \\_____\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\  \\ \\_\\\\"\\_\\'.magenta + "\n" + '  \\/_/\\/_/   \\/_/\\/_/   \\/_____/   \\/_____/   \\/_____/   \\/_/  \\/_/   \\/_____/   \\/_/ \\/_/'.blue);
-	console.log('node-version: %s, V8-version: %s, %s: %s, %s CPUs',process.versions.node,process.versions.v8,os.platform(),os.release(),os.cpus().length);
-
 	game = new Game(level);
-	game.setChat(function(inText) {httpIO.sockets.emit('chat', { name: 'boss', text: inText });});
+	winston.info("[server] game level %s loaded", level);
 
-	if (process.argv.length > 2) {
-		if ((!isNaN(parseFloat(process.argv[2]))) && (process.argv[2] > 0) && (process.argv[2] < 65536))
-			port = process.argv[2];
-		else
-			winston.warn(process.argv[2] + " is not a Port Number! Using " + port + " instead!");
+	game.setChat(function(inText) {
+		httpIO.sockets.emit('chat', {
+			name: 'boss',
+			text: inText
+		});
+	});
+
+	//****************************//
+	// START HTTP SERVER
+	//****************************//
+
+	let httpPort = config.ports.http || port;
+	if ((httpPort < 1) || (httpPort > 65535)) {
+		winston.warn("%s is not a Port Number! Using %s for http instead!", httpPort, defaultPort);
+		httpPort = defaultPort;
 	}
-	
-	httpServer.listen(port, function() {
-		winston.info("[server] listening on: http://localhost:%s", port);
+	httpServer.listen(httpPort, function() {
+		winston.info("[server] listening on: http://localhost:%s", httpPort);
 	});
-	httpsServer.listen((port-1000), function() {
-		winston.info("[server] listening on: https://localhost:%s", (port-1000));
-	});
-	var stdin = process.openStdin();
-	stdin.on('data', handleConsole);
-
 	httpIO.sockets.on('connection', handleSocket, httpIO);
-	httpsIO.sockets.on('connection', handleSocket, httpsIO);
+	winston.info("[server] http websocket enabled: http://localhost:%s", httpPort);
 
-	var startMeasure = misc.cpuAverage();
+	//****************************//
+	// START HTTPS SERVER
+	//****************************//
 
-	setInterval(function() {
-		//Grab second Measure
-		var endMeasure = misc.cpuAverage();
-		//Calculate the difference in idle and total time between the measures
-		var idleDifference = endMeasure.idle - startMeasure.idle;
-		var totalDifference = endMeasure.total - startMeasure.total;
-		var percentageCPU = Math.floor(200000 - 200000 * idleDifference / totalDifference) / 100;
-		startMeasure = endMeasure;
-		winston.info('[healthy] ' + percentageCPU + '% cpu load; ' + (Math.floor(process.memoryUsage().heapUsed / 10485, 76) / 100) + '/' + (Math.floor(process.memoryUsage().heapTotal / 10485, 76) / 100) + '\u3386 heap used; ' + (Math.floor(os.freemem() / 10485, 76) / 100) + '\u3386 free sys mem; ' + healthData.requestCount / 10 + ' reqs/s' + (healthData.requestCount === 0 ? '' : '; avg ' + Math.floor(10 * healthData.avgTime / healthData.requestCount) / 10 + 'ms/req') + '; ' + Object.keys(game.men).length + ' player(s)');
-		healthData = {
-			startTime: process.hrtime(),
-			avgTime: 0,
-			requestCount: 0
-		};
-	}, 10000);
+	if (httpsServer != null) {
+		let httpsPort = config.ports.https || (port - 1000);
+		if ((httpsPort < 1) || (httpsPort > 65535)) {
+			winston.warn("%s is not a Port Number! Using %s for https instead!", httpsPort, (defaultPort - 1000));
+			httpsPort = (defaultPort - 1000);
+		}
+		httpsServer.listen(httpsPort, function() {
+			winston.info("[server] listening on: https://localhost:%s", httpsPort);
+		});
+		httpsIO.sockets.on('connection', handleSocket, httpsIO);
+		winston.info("[server] https websocket enabled: http://localhost:%s", httpsPort);
+	}
+
+	//****************************//
+	// LEGACY CONSOLE CONTROL
+	//****************************//
+
+	process.openStdin().on('data', handleConsole);
+
+	setInterval(checkSystemHealthy, 10000);
+}
+
+function checkSystemHealthy() {
+	//Grab second Measure
+	var endMeasure = misc.cpuAverage();
+	//Calculate the difference in idle and total time between the measures
+	var idleDifference = endMeasure.idle - startMeasure.idle;
+	var totalDifference = endMeasure.total - startMeasure.total;
+	var percentageCPU = Math.floor(200000 - 200000 * idleDifference / totalDifference) / 100;
+	startMeasure = endMeasure;
+	winston.info('[healthy] ' + percentageCPU + '% cpu load; ' + (Math.floor(process.memoryUsage().heapUsed / 10485, 76) / 100) + '/' + (Math.floor(process.memoryUsage().heapTotal / 10485, 76) / 100) + '㎆ heap used; ' + (Math.floor(os.freemem() / 10485, 76) / 100) + '㎆ free sys mem; ' + healthData.requestCount / 10 + ' reqs/s' + (healthData.requestCount === 0 ? '' : '; avg ' + Math.floor(10 * healthData.avgTime / healthData.requestCount) / 10 + 'ms/req') + '; ' + Object.keys(game.men).length + ' player(s)');
+	healthData = {
+		startTime: process.hrtime(),
+		avgTime: 0,
+		requestCount: 0
+	};
 }
 
 function myResponse(response, err, data) {
@@ -97,7 +167,8 @@ function myResponse(response, err, data) {
 		lastLog = err.message;
 		if (err.code != 200) {
 			winston.warn("[response] " + err.message);
-		} else {
+		}
+		else {
 			winston.info("[response] " + err.message);
 		}
 	}
@@ -109,23 +180,35 @@ function myResponse(response, err, data) {
 	healthData.avgTime += process.hrtime()[1] / 1e9;
 }
 
-function handleSocket (newSocket) {
-	test=util.inspect(newSocket.request.connection, {showHidden: true, colors: true});
+function handleSocket(newSocket) {
+	test = util.inspect(newSocket.request.connection, {
+		showHidden: true,
+		colors: true
+	});
 	socket = newSocket;
-		// der Client ist verbunden
-		socket.emit('chat', { name: 'boss', text: 'welcome to kaboomen chat!' });
-		// wenn ein Benutzer einen Text senden
-		socket.on('chat', function (data) {
+	// der Client ist verbunden
+	socket.emit('chat', {
+		name: 'boss',
+		text: 'welcome to kaboomen chat!'
+	});
+	// wenn ein Benutzer einen Text senden
+	socket.on('chat', function(data) {
 		// so wird dieser Text an alle anderen Benutzer gesendet
-			httpIO.sockets.emit('chat', {name: data.name || 'Anonym', text: data.text });
-			httpsIO.sockets.emit('chat', {name: data.name || 'Anonym', text: data.text });
+		httpIO.sockets.emit('chat', {
+			name: data.name || 'Anonym',
+			text: data.text
 		});
-		test = socket.on('order', function (data) {
-			if (proceedOrder(data.authCode,data.order).code == 301) {
-				winston.warn('got order with wrong authcode!');
-				socket.emit('order', data.authCode);
-			}
+		httpsIO.sockets.emit('chat', {
+			name: data.name || 'Anonym',
+			text: data.text
 		});
+	});
+	test = socket.on('order', function(data) {
+		if (proceedOrder(data.authCode, data.order).code == 301) {
+			winston.warn('got order with wrong authcode!');
+			socket.emit('order', data.authCode);
+		}
+	});
 	game.setSockets([httpIO.sockets, httpsIO.sockets]);
 }
 
@@ -141,7 +224,7 @@ function handleRequest(request, response) {
 		myResponse(response, err);
 		return;
 	}
-	response.setHeader("Access-Control-Allow-Origin", "*");//"http://dev.kaboomen.de");
+	response.setHeader("Access-Control-Allow-Origin", "*"); //"http://dev.kaboomen.de");
 	response.setHeader("Access-Control-Allow-Credentials", "true");
 	response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -167,17 +250,20 @@ function handleRequest(request, response) {
 			return;
 		}
 		if (params[1] == 'debug') {
-				myResponse(response, {code:200,message:"This is a test"}, test);
-				return;
-		}	
+			myResponse(response, {
+				code: 200,
+				message: "This is a test"
+			}, test);
+			return;
+		}
 		if (params[1] == 'map') {
-				myResponse(response, err, game.getGroundMapStringified());
-				return;
-		}	
+			myResponse(response, err, game.getGroundMapStringified());
+			return;
+		}
 		if (params[1] == 'simple') {
-				myResponse(response, err, game.getGameStringifiedSimple());
-				return;
-		}	
+			myResponse(response, err, game.getGameStringifiedSimple());
+			return;
+		}
 		if (params[1] == 'extended') {
 			if (params[2] < game.getRev()) {
 				myResponse(response, err, game.getGameStringifiedExtended());
@@ -197,16 +283,16 @@ function handleRequest(request, response) {
 			return;
 		}
 		if (params.length > 2) {
-			err = proceedOrder(params[1],params[2]);
-			if (err.code==301) winston.warn('got order with wrong authcode!');
+			err = proceedOrder(params[1], params[2]);
+			if (err.code == 301) winston.warn('got order with wrong authcode!');
 			myResponse(response, err);
 			return;
 		}
 	}
 	myResponse(response, err, game.getGameStringifiedSimple());
 }
- 
-function proceedOrder(authCode,order){
+
+function proceedOrder(authCode, order) {
 	var isBot = false;
 	if (order == 'update') {
 		game.commit();
@@ -216,7 +302,7 @@ function proceedOrder(authCode,order){
 			message: "As you wish!"
 		};
 	}
-	if (order[0]=='i') {
+	if (order[0] == 'i') {
 		isBot = true;
 		order = order.substring(1);
 	}
@@ -230,16 +316,16 @@ function proceedOrder(authCode,order){
 	if (order == 'up')
 		return game.manWalk(playerID, c.MOVE_UP, isBot);
 	else if (order == 'down')
-		return  game.manWalk(playerID, c.MOVE_DOWN, isBot);
+		return game.manWalk(playerID, c.MOVE_DOWN, isBot);
 	else if (order == 'left')
-		return  game.manWalk(playerID, c.MOVE_LEFT, isBot);
+		return game.manWalk(playerID, c.MOVE_LEFT, isBot);
 	else if (order == 'right')
 		return game.manWalk(playerID, c.MOVE_RIGHT, isBot);
 	else if (order == 'bomb')
 		return game.placeBomb(playerID);
 	return {
-			code: 501,
-			message: "Unknown order!"
+		code: 501,
+		message: "Unknown order!"
 	};
 }
 

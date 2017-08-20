@@ -1,0 +1,10 @@
+[ports]
+http = 8081
+https = 7081
+
+[ssl]
+cert = /etc/apache2/ssl/cert.pem
+key = /etc/apache2/ssl/key.pem
+
+[game]
+level = 'manos'
