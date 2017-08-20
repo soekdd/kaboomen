@@ -1,0 +1,116 @@
+module.exports = {
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+    {
+        name      : 'kaboomen',
+        cwd       : '/opt/workspace/__server/',
+        script    : '/opt/workspace/__server/server.js',
+        exec_mode : 'fork',
+        ignore_watch : ['[\/\\]\./', 'node_modules', 'level', 'common_lib'],
+        watch     : true,
+        min_uptime: "5m",
+        out_file  : '/var/log/kaboomen/kaboomen8081-out.log',
+        error_file: '/var/log/kaboomen/kaboomen8081-err.log',
+        env: {
+                PORT: '8081',
+                LEVEL: 'classic'
+        },
+        env_production : {
+                NODE_ENV: 'production'
+        }
+    },
+    {
+        name      : 'kaboomen',
+	cwd       : '/opt/workspace/__server/',
+        script    : '/opt/workspace/__server/server.js',
+        exec_mode : 'fork',
+	ignore_watch : ['[\/\\]\./', 'node_modules', 'level', 'common_lib'],
+	watch     : true,
+	min_uptime: "5m",
+	out_file  : '/var/log/kaboomen/kaboomen8082-out.log',
+	error_file: '/var/log/kaboomen/kaboomen8082-err.log',
+        env: {
+                PORT: '8082',
+                LEVEL: 'manos'
+        },
+        env_production : {
+                NODE_ENV: 'production'
+        }
+    },
+    {
+	name      : 'kaboomen',
+        cwd       : '/opt/workspace/__server/',
+	script    : '/opt/workspace/__server/server.js',
+	exec_mode : 'fork',        
+	ignore_watch : ['[\/\\]\./', 'node_modules', 'level', 'common_lib'],
+        watch     : true,
+	min_uptime: "5m",
+        out_file  : '/var/log/kaboomen/kaboomen8083-out.log',
+        error_file: '/var/log/kaboomen/kaboomen8083-err.log',
+	env: {
+		PORT: '8083',
+		LEVEL: 'maze'
+	},
+	env_production : {
+		NODE_ENV: 'production'
+	}
+    },
+    {
+        name      : 'kaboobot',
+        cwd       : '/opt/workspace/__server/',
+        script    : '/opt/workspace/__server/bot.js',
+        exec_mode : 'fork',
+        ignore_watch : ['[\/\\]\./', 'node_modules', 'level', 'common_lib'],
+        watch     : true,
+        min_uptime: "5m",
+        out_file  : '/var/log/kaboomen/kaboobotA8082-out.log',
+        error_file: '/var/log/kaboomen/kaboobotA8082-err.log',
+        env: {
+                PORT: '8081',
+		NAME: 'NodeBot'
+        },
+        env_production : {
+                NODE_ENV: 'production'
+        }
+    },
+    {
+        name      : 'kaboobot',
+        cwd       : '/opt/workspace/__server/',
+        script    : '/opt/workspace/__server/bot.js',
+        exec_mode : 'fork',
+        ignore_watch : ['[\/\\]\./', 'node_modules', 'level', 'common_lib'],
+        watch     : true,
+        min_uptime: "5m",
+        out_file  : '/var/log/kaboomen/kaboobotA8082-out.log',
+        error_file: '/var/log/kaboomen/kaboobotA8082-err.log',
+        env: {
+                PORT: '8082',
+		NAME: 'MaxBot'
+        },
+        env_production : {
+                NODE_ENV: 'production'
+        }
+    },
+    {
+        name      : 'kaboobot',
+        cwd       : '/opt/workspace/__server/',
+        script    : '/opt/workspace/__server/bot.js',
+        exec_mode : 'fork',
+        ignore_watch : ['[\/\\]\./', 'node_modules', 'level', 'common_lib'],
+        watch     : true,
+        min_uptime: "5m",
+        out_file  : '/var/log/kaboomen/kaboobotB8082-out.log',
+        error_file: '/var/log/kaboomen/kaboobotB8082-err.log',
+        env: {
+                PORT: '8082',
+                NAME: 'MoritzBot'
+        },
+        env_production : {
+                NODE_ENV: 'production'
+        }
+    },
+  ]
+};
