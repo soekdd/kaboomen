@@ -1,4 +1,4 @@
-# kaboomen documentation
+# kaboomen
 Kaboomen is a school project to teach children's web technologies by programming a web client for a massive multiplayer online game. 
 
 ## install
@@ -49,9 +49,10 @@ the values is explained in the common_lib/js/kaboomen_consts.js. This file is us
 and clients simultanly. 
 
 Map elements and filters: 
-|value dec|value hex|meaning|kaboomenconsts.js name|
+
+|value dec|value hex|meaning|kaboomenconstsjs name|
 |---------|---------|-------|-----------------------|
-|value dec|value hex|meaning|kaboomenconsts.js name|
+|value dec|value hex|meaning|kaboomenconstsjs name|
 
 
 |0        |0x00     |floor  |MAP_FLOOR|
@@ -63,6 +64,7 @@ Map elements and filters:
 |256..    |0x100..  |player plus it's id|FILTER_PLAYER|
 
 Goodies:
+
 |value additional to it's filter|meaning|kaboomen_consts.js name|
 |-------------------------------|-------|-----------------------|
 |1|good goodie: increase bombs radius|GOODIE_MORE_EXPL|
@@ -76,6 +78,7 @@ Goodies:
 |9|special goodie: player will get remote bombs|GOODIE_REMOTEBOMB|
 
 Explosions:
+
 |value additional to it's filter|part of explosion|kaboomen_consts.js name|
 |-------------------------------|-------|-----------------------|
 |1|center|MAP_BOMB_CENTER|
