@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="site.css">
+    <script type="text/javascript" src="common_lib/js/jquery.js"></script>
+    <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+    <script type="text/javascript" src="site.js"></script>
+</head>
+
+<body>
+    <div class="control">
+        <div class="rightBar">load:&nbsp;<select onchange="load()" style="width:150px;position:absolute;right:0px" id="levelList"></select></div>
+        <br><span class="rightBar">filename:</span><br>
+        <input type="text" class="rightBar" onblur="getFormular()" id="filename"><br>
+        <br><span class="rightBar">title:</span><br>
+        <input type="text" class="rightBar" onblur="getFormular()" id="title"><br>&nbsp;<br>
+        <button onclick="save()" class="rightBar">save</button>&nbsp;<br>&nbsp;<br>
+        <input type="checkbox" onclick="getFormular()" id="active">&nbsp;active?&nbsp;<br>
+        <br><div class="rightBar" style="width:60px;float:left">width:&nbsp;</div>
+        <input class="rightBar" onblur="getFormular()" style="width:90px" id="width">&nbsp;cols<br>
+        <br><div class="rightBar" style="width:60px;float:left">height:&nbsp;</div>
+        <input class="rightBar" onblur="getFormular()" style="width:90px" id="height">&nbsp;rows<br>
+    </div>
+    <div class="palette">
+        <div id="wall" class="col"></div>
+        <div id="ground" class="col"></div>
+    </div>
+    <div class="level" id="game"></div>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+body {
+    font-family: Lato, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+}
+
+.tile {
+    width: 33px;
+    height: 33px;
+    position: absolute
+}
+
+.wall {
+    width:33px;
+    height:33px;
+    background: url(../soek/img/ground.png);
+    background-position:0px 0px;
+    background-size:2000%;
+}
+
+.col {
+    position: relative;
+}
+
+#wall {
+    left:100px;
+}
+.rightBar{
+    width:200px;
+    position:relative;
+}
+.level {
+    padding: 0;
+    margin: 0 auto auto auto;
+    position: relative;
+}
+
+.control, .palette {
+    position:absolute;
+    top:0px;
+    padding:15px;
+} 
+.palette {
+    left:0px;
+}
+
+.control {
+    right:0px;
+}
+
+.active {
+    border: 2px solid red;
+}
+
+.inactive {
+    border: 2px solid lightgray;
+}
+
+.ground {
+    width:33px;
+    height:33px;
+    background: url(../soek/img/ground.png);
+    background-position-y:33px;
+    background-position:0px 33px;
+    background-size:2000%;
+}
+
+.bV1{
+    background-position-x:0;
+}
+
+.bV2{
+    background-position-x:-100%;
+}
+
+.bV3{
+    background-position-x:-200%;
+}
+
+.bV4{
+    background-position-x:-300%;
+}
+
+.bV5{
+    background-position-x:-400%;
+}
+
+.bV6{
+    background-position-x:-500%;
+}
+
+.bV7{
+    background-position-x:-600%;
+}
+
+.bV8{
+    background-position-x:-700%;
+}
+
+.bV9{
+    background-position-x:-800%;
+}
+
+.bV10{
+    background-position-x:-900%;
+}
+
+.bV11{
+    background-position-x:-1000%;
+}
+
+.bV12{
+    background-position-x:-1100%;
+}
+
+.bV13{
+    background-position-x:-1200%;
+}
+
+.bV14{
+    background-position-x:-1300%;
+}
+
+.bV15{
+    background-position-x:-1400%;
+}
+
+.bV16{
+    background-position-x:-1500%;
+}
+
+.bV17{
+    background-position-x:-1600%;
+}
+
+.bV18{
+    background-position-x:-1700%;
+}
+
+.bV19{
+    background-position-x:-1800%;
+}
+
+.bV20{
+    background-position-x:-1900%;
+}
+
