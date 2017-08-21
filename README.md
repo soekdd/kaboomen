@@ -5,10 +5,15 @@ Kaboomen is a school project to teach children's web technologies by programming
 
 ### linux
 
-    install.sh
+    git clone https://github.com/soekdd/kaboomen.git
+    cd kaboomen/server
+    chmod u+x *.sh
+    ./install.sh
 
 ### windows
 
+    git clone https://github.com/soekdd/kaboomen.git
+    cd kaboomen/server
     install.bat
     
 ## usage of game server
@@ -50,11 +55,8 @@ and clients simultanly.
 
 Map elements and filters: 
 
-|value dec|value hex|meaning|kaboomenconstsjs name|
+|value dec|value hex|meaning|kaboomen_consts.js var|
 |---------|---------|-------|-----------------------|
-|value dec|value hex|meaning|kaboomenconstsjs name|
-
-
 |0        |0x00     |floor  |MAP_FLOOR|
 |1        |0x01     |wall   |MAP_WALL|
 |3        |0x03     |bomb   |ITEM_BOMB|
@@ -65,7 +67,7 @@ Map elements and filters:
 
 Goodies:
 
-|value additional to it's filter|meaning|kaboomen_consts.js name|
+|value additional to it's filter|meaning|kaboomen_consts.js var|
 |-------------------------------|-------|-----------------------|
 |1|good goodie: increase bombs radius|GOODIE_MORE_EXPL|
 |2|bad goodie: decrease bombs radius|GOODIE_LESS_EXPL|
@@ -79,7 +81,7 @@ Goodies:
 
 Explosions:
 
-|value additional to it's filter|part of explosion|kaboomen_consts.js name|
+|value additional to it's filter|part of explosion|kaboomen_consts.js var|
 |-------------------------------|-------|-----------------------|
 |1|center|MAP_BOMB_CENTER|
 |2|horizontal|MAP_BOMB_HORI|
