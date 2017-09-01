@@ -5,6 +5,7 @@ var oldGame = 0;
 var oldPlayers = 0;
 var start = 0;
 var rev = 0;
+var updateRequest = null;
 var socket = null;
 var authCode = -1;
 var playerID = -1;
@@ -35,6 +36,10 @@ var sounds = {
     };
 }*/
 
+function sendUpdateOrder(){
+    //in case of inactivity, websocket doesnt send updates.
+    sendOrder('update'); 
+}
 
 function changeServer() {
     choosenServer = servers[$('#servers').val()];
@@ -48,11 +53,12 @@ function changeServer() {
         men: []
     });
     main();
-    if (connectionType == "sockets")
-        setInterval(function() {
-            //in case of inactivity, websocket doesnt send updates.
-            sendOrder('update'); //force an update
-        }, 500);
+    if (connectionType == "sockets") {
+        sendUpdateOrder();
+        if (updateRequest!=null)
+            clearInterval(updateRequest);
+        updateRequest = setInterval(sendUpdateOrder, 5000);
+    }
 }
 
 function createMap(ground) {
