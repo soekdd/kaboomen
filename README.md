@@ -1,5 +1,5 @@
 # kaboomen
-Kaboomen is a school project to teach children's web technologies by programming a web client for a massive multiplayer online game. 
+Kaboomen is a school project to teach children web technologies by programming a web client for a massive multiplayer online game. 
 
 ## install
 
