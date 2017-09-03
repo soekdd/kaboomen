@@ -13,7 +13,7 @@ var playersName = "unknown";
 var soundsPlayed = [];
 var variations = [];
 var servers = ["http://kaboomen.de:8081/", "http://kaboomen.de:8082/", "http://kaboomen.de:8083/", "https://www.kaboomen.com:7081/", "https://www.kaboomen.com:7082/", "https://www.kaboomen.com:7083/", "http://api.kaboomen.de/", "http://localhost:8081/", "http://192.168.0.10:8081/"];
-var choosenServer = servers[0];
+var choosenServer = null;
 var soundControl = true;
 var sounds = {
     good: new Audio('sounds/good.mp3'),
@@ -501,13 +501,18 @@ function loginscreen(enabled) {
 }
 
 function main() {
+    var protocol = window.location.href.split('/')[0];
     authCode = localStorage.getItem("kaboomen.login.authCode");
     playerID = localStorage.getItem("kaboomen.login.playerID");
     loginscreen(authCode == null);
     var s = '';
 
     for (var j = 0; j < servers.length; j++) {
-        s = s + '<option value="' + j + '"' + (j == $('#servers').val() ? ' selected="selected"' : '') + '>' + servers[j] + '</option>';
+        if (protocol=='http:' || servers[j].indexOf(protocol)>-1) {
+            s = s + '<option value="' + j + '"' + (j == $('#servers').val() ? ' selected="selected"' : '') + '>' + servers[j] + '</option>';
+            if (choosenServer == null)
+                choosenServer = servers[j];
+        }
     }
     document.getElementById('servers').innerHTML = s;
     $('#newPlayer').keypress(function(e) {
