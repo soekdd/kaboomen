@@ -13,7 +13,7 @@
 	exports.START_BOMBS = 2;
 	exports.START_COUNTDOWN = 3; // in seconds
 
-	exports.CHANCE_OF_GOODIES = 20; // in percent
+	exports.CHANCE_OF_GOODIES = 80; // in percent
 	exports.SOUND_MAINTENANCE = 0.5; // in seconds
 	exports.SOUND_KEY_GOOD = 'good';
 	exports.SOUND_KEY_BAD = 'bad';
