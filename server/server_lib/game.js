@@ -219,9 +219,13 @@ class Game {
 	 * creates a new player
 	 */
 	createNewMan(name) {
+		name = encodeURI(name);
 		var manId = this.findSmallId(this.men);
 		var newAuth = Math.abs(Math.random() * 0xffffffff | 0);
 		this.auth[newAuth] = manId;
+		if (name.length>10) {
+			name = name.substr(0,7)+'...';
+		}
 		var man = new KaboomenMan(manId, name);
 		var pos = this.gameMap.getFloor();
 		man.setPosition(pos.x, pos.y);
