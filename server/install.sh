@@ -9,5 +9,5 @@ ln -s  ../../server/common_lib clients/tigrix/common_lib
 ln -s  ../../server/common_lib clients/thusjab/common_lib
 ln -s  ../../server/common_lib clients/pitizzle/common_lib
 ln -s  ../../server/common_lib clients/kabooboy/common_lib
-ln -s  ../../server/common_lib clients/linus/common_lib
+ln -s  ../../server/common_lib clients/badmin/common_lib
 ln -s  ../../server/common_lib clients/patrick/common_lib
