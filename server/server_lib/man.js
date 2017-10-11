@@ -10,6 +10,7 @@ class Man {
 		this.anim = 0;
 		this.look = manId % c.MAX_LOOKS;
 		this.bombs = c.START_BOMBS;
+		this.maxBombs = c.START_BOMBS;
 		this.score = 0;
 		this.next = '';
 		this.action = c.WAITS;
@@ -64,7 +65,6 @@ class Man {
 			this.speed = c.START_SPEED;
 		if (this.speed > c.START_SPEED)
 			this.speed --;
-			
 	}
 	
 	disableIndestructible(){
@@ -140,6 +140,8 @@ class Man {
 
 	incBombs() {
 		this.bombs++;
+		if (this.bombs > this.maxBombs)
+			this.bombs = this.maxBombs
 	}
 
 	decBombs() {
@@ -151,9 +153,32 @@ class Man {
 		return this.bombs;
 	}
 
+	incMaxBombs() {
+		this.maxBombs++;
+		this.incBombs();
+		if (this.bombs > this.maxBombs)
+			this.bombs = this.maxBombs
+	}
+
+	decMaxBombs() {
+		if (this.maxBombs > 1)
+			this.maxBombs--;
+		this.decBombs();
+		if (this.bombs > this.maxBombs)
+			this.bombs = this.maxBombs
+	}
+
+	getMaxBombs() {
+		return this.maxBombs;
+	}
+
 	resetBombs() {
-		if (this.bombs > c.START_BOMBS)
-			this.bombs --;
+		if (this.maxBombs < c.START_BOMBS)
+			this.maxBombs ++;
+		if (this.maxBombs > c.START_BOMBS)
+			this.maxBombs --;
+		if (this.bombs > this.maxBombs)
+			this.bombs = this.maxBombs
 	}
 
 	getCountDown() {
