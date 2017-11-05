@@ -156,8 +156,6 @@ class Man {
 	incMaxBombs() {
 		this.maxBombs++;
 		this.incBombs();
-		if (this.bombs > this.maxBombs)
-			this.bombs = this.maxBombs
 	}
 
 	decMaxBombs() {
@@ -174,7 +172,7 @@ class Man {
 
 	resetBombs() {
 		if (this.maxBombs < c.START_BOMBS)
-			this.maxBombs ++;
+			this.maxBombs = c.START_BOMBS;
 		if (this.maxBombs > c.START_BOMBS)
 			this.maxBombs --;
 		if (this.bombs > this.maxBombs)
