@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="http://kaboomen.de/dregzo/common_lib/js/jquery.js"></script>
+        <style type="text/css">
+            th {
+                background:#FF0000;   
+            }
+            .nation {
+                background:#00FF00;
+            }
+            .city {
+                background:#0000FF;
+            }
+			#bild {
+				position:absolute;
+				top:200px;
+				left:500px;
+			}
+        </style>
+		<script>
+			/*global $*/     //damit die IDE auch die globalen Variablen der Module erkennt
+			function main() {  //Funktion, mit der alles beginnt
+				$('th').attr('style','background:#FFFF00;'); //aendere von allen th das Attribut style zu ......
+				$('.city').html('NOCAPITAL');    //aendere Inhalt von allen Elementen der Klasse .city
+				$('.nation').html($('.nation').html()+'XXX');  //ergaenze den Inhalt aller Elemente der Klasse .nation um XXX
+				$('.nation').append('DDD');  //ergaenzt ebenfalls Inhalt
+				$.getJSON('https://api.truckersmp.com/v2/bans/1386293',jsonisthere);
+			}
+			function jsonisthere (json) {
+				var s = json.response[0]['adminName'];
+				$('#bans').html(s);
+				/*
+				Hinweise zum Auslesen von JSON:
+				Objekte (gekennzeichnet mit {}) enthalten Werte nach key/value Prinzip.
+				Ansteuern der Value des Keys "x": entweder object.x oder object['x']
+				Arrays (gekennzeichnet mit []) enthalten eine geordnete Liste von Daten.
+				Ansteuern der Arrayvalue an x-ter Position: array[x]
+				*/
+			}
+			$('document').ready(main);  //Führe die Mainfunktion aus, wenn du am Ende des Dokumentes angekommen bist
+		</script>
+    </head>
+    <body>
+		<div>
+			<p>TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT</p>
+		</div>
+        <img src="https://cdn.discordapp.com/attachments/277836339687194625/371681778894635008/nHufNWX.png" id="bild">
+        <table>
+            <tr>
+                <th>nation</th>
+                <th>capital</th>
+            </tr>
+            <tr>
+                <td class="nation">Niederlande</td>
+                <td class="city">Holland</td>
+            </tr>
+            <tr>
+                <td class="nation">Deutsche Demokratische Republik</td>
+                <td class="city">Dresden</td>
+            </tr>
+        </table>
+		<p id="bans"></p>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<script type="text/javascript" src="../common_lib/js/jquery.js"></script>
+		<script type="text/javascript" src="../common_lib/js/kaboomen_consts.js"></script>
+		<script>
+			/*global $, c*/
+			let lastRev = 0;
+			function main(){
+				let s = '';
+				for(let zeile=0; zeile<c.SET_HEIGHT; zeile++){
+					s += '<tr>';
+					for(let spalte=0; spalte<c.SET_WIDTH; spalte++){
+						s += '<td id="' + zeile + '_' + spalte + '"></td>';
+					}
+					s += '</tr>';
+				}
+				//$('#spielfeld').html(s);
+				document.getElementById('spielfeld').innerHTML = s;
+				refresh();
+				setInterval(refresh, 100);
+			}
+			function refresh(){
+				/*counter = (counter+1) % 10;
+				for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
+                    for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) {
+                      $('#'+zeile+'_'+spalte).html(""+counter);
+                    }
+               }*/
+              
+			   $.getJSON('http://kaboomen.de:8081/standard/'+lastRev, received);
+			}
+			function received(spielinfo){
+				lastRev = spielinfo.rev;
+				for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
+                    for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) {
+                      $('#'+zeile+'_'+spalte).html(spielinfo.map[zeile][spalte]);
+                    }
+				}
+			}
+			$(document).ready(main);
+		</script>
+		
+		<style>
+			table{border-collapse: collapse;}
+			table, tr, td {border: 1px solid black}
+		</style>
+	</head>
+	<body style="margin: 0px">
+		<table id="spielfeld" style="width: 100%"></table>
+	</body>
+</html>

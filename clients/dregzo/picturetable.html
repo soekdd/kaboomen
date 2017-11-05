@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- Zusammenfuehrung von Bildern und Tabelle -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Title</title>
+        <style>
+            .ground {
+                background-image: url('http://kaboomen.de/soek/img/ground.png'); /*Legt das Image fest*/
+                width: 30px; /*Angabe der Groesse des Ausschnittes, der später gezeigt wird*/
+                height: 30px;
+                background-size: 2000%, 200%; /*Streckung des Bildes auf eine Groesse relativ zum Ausschnitt*/
+                /*position: absolute; /*Freie Beweglichkeit des Bildes*/
+            }
+            .floor {
+                background-position-x: -200%;
+                background-position-y: -100%;
+            }
+            .wall_0_0_0_0 {
+                background-position-x: 0%; /*Positionierung  des Ausschnittes*/
+                background-position-y: 0%;
+            }
+            .wall_0_0_1_1 {
+                background-position-x: -100%;
+                background-position-y: 0%;
+            }
+            .wall_1_1_0_0 {
+                background-position-x: -200%;
+                background-position-y: 0%;
+            }
+            .wall_1_0_1_0 {
+                background-position-x: -300%;
+                background-position-y: 0%;
+            }
+            .wall_0_1_0_1 {
+                background-position-x: -400%;
+                background-position-y: 0%;
+            }
+            .wall_1_0_0_1 {
+                background-position-x: -500%;
+                background-position-y: 0%;
+            }
+            .wall_0_1_1_0 {
+                background-position-x: -600%;
+                background-position-y: 0%;
+            }
+            .defstyle {
+                background-position-x: -1400%;
+                background-position-y: 0%;
+            }
+            td {
+                padding: 0px;
+            }
+            .object {
+                background-image: url('http://kaboomen.de/dregzo/objects.png');
+                width: 30px; 
+                height: 30px;
+                background-size: 1300%, 100%;
+            }
+            .box3 {
+                background-position-x: 0%;
+                background-position-y: 0%;
+            }
+            .box2 {
+                background-position-x: -100%;
+                background-position-y: 0%;
+            }
+            .box1 {
+                background-position-x: -200%;
+                background-position-y: 0%;
+            }
+            .item17 {
+                background-position-x: -300%;
+                background-position-y: 0%;
+            }
+            .item18 {
+                background-position-x: -400%;
+                background-position-y: 0%;
+            }
+            .item19 {
+                background-position-x: -500%;
+                background-position-y: 0%;
+            }
+            .item20 {
+                background-position-x: -600%;
+                background-position-y: 0%;
+            }
+            .item21 {
+                background-position-x: -700%;
+                background-position-y: 0%;
+            }
+            .item22 {
+                background-position-x: -800%;
+                background-position-y: 0%;
+            }
+            .item23 {
+                background-position-x: -900%;
+                background-position-y: 0%;
+            }
+            .item24 {
+                background-position-x: -1000%;
+                background-position-y: 0%;
+            }
+            .item25 {
+                background-position-x: -1100%;
+                background-position-y: 0%;
+            }
+            .player {
+                background-position-x: -1200%;
+                background-position-y: 0%;
+            }
+            #tabelle {
+                border-spacing: 0px;
+            }
+        </style>
+        <script type="text/javascript" src="common_lib/js/jquery.js"></script>
+        <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+        <script>
+            /*global c,$*/
+            var rev = 0;
+            function main () {
+                var s = '';
+                for (var i=0;i<c.SET_HEIGHT;i++) {
+                    s += '<tr>';
+                    for (var j=0;j<c.SET_WIDTH;j++) {
+                        s += '<td id="'+i+'_'+j+'">'+'xxx'+'</td>';
+                    }   
+                    s += '</tr>';
+                    $('#tabelle').html(s);
+                }
+                setInterval(refresh,100);
+            }
+            function refresh () {
+                $.getJSON('http://kaboomen.de:8081/standard/'+rev,jsonisthere);
+            }
+            function jsonisthere(json) {
+                for (var i=0;i<c.SET_HEIGHT;i++) {
+                    for (var j=0;j<c.SET_WIDTH;j++) {
+                        $('#'+i+'_'+j).html(getpic(i,j,json));    
+                    }
+                }
+                rev = json.rev;
+            }
+            function getpic(i,j,json) {
+                var id = json.map[i][j];
+                var cls = '';
+                switch (id) {
+                    case 0:
+                        cls = 'ground floor';
+                        break;
+                    case 1:
+                        var top = 0;
+                        var bottom = 0;
+                        var left = 0;
+                        var right = 0;
+                        if (i<c.SET_HEIGHT-1) {
+                            if (json.map[i+1][j] == '1') {
+                                bottom = 1;
+                            }
+                        }
+                        if (i>0) {
+                            if (json.map[i-1][j] == '1') {
+                                top = 1;
+                            }
+                        }
+                        if (j<c.SET_WIDTH-1) {
+                            if (json.map[i][j+1] == '1') {
+                                right = 1;
+                            }
+                        }
+                        if (j>0) {
+                            if (json.map[i][j-1] == '1') {
+                                left = 1;
+                            }
+                        }
+                        cls = 'ground wall_'+top+'_'+bottom+'_'+left+'_'+right;
+                        break;
+                    case 17:
+                        cls = 'object item17';
+                        break;
+                    case 18:
+                        cls = 'object item18';
+                        break;
+                    case 19:
+                        cls = 'object item19';
+                        break;
+                    case 20:
+                        cls = 'object item20';
+                        break;
+                    case 21:
+                        cls = 'object item21';
+                        break;
+                    case 22:
+                        cls = 'object item22';
+                        break;
+                    case 23:
+                        cls = 'object item23';
+                        break;
+                    case 24:
+                        cls = 'object item24';
+                        break;
+                    case 25:
+                        cls = 'object item25';
+                        break;
+                    case 65:
+                        cls = 'object box1';
+                        break;
+                    case 66:
+                        cls = 'object box2';
+                        break;
+                    case 67:
+                        cls = 'object box3';
+                        break;
+                    case 257:
+                        cls = 'object player';
+                        break;
+                    default:
+                        cls = 'ground defstyle';
+                }
+                return '<div class="'+cls+'"></div>';
+            }
+            $(document).ready(main);
+        </script>
+    </head>
+    <body>
+        <div class="ground defstyle"></div>
+        <div></div>
+        <div></div>
+        
+        <table id="tabelle">
+        </table>
+    </body>
+</html>

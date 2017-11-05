@@ -1,51 +1,103 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title> I BIMS DIE W&Auml;BSEIT </title>
-		
-		<style>
-			th,td {border:1px solid black,text-decoration:underline}
-			h1 {text-decoration:underline}
-			.spielfeld tr {text-decoration:none;border:0px solid black}
-			span {color:blue;background-color:yellow}
-			.spielfeld th {background-color:gray}
-		</style>
-	</head>
-	<body>
-		<h1> H&Auml;LLO W&Ouml;ALD </h1>
-		<div>
-			<h2> I BIMS GRANUX </h2>
-			<p>
-				Ich schreibe Text <br/> &uuml;ber <span>VIELE ZEILEN</span>!!!!1!11!11!
-			</p>
-		</div>
-		<div>
-			<h2> NOCH MEHR &Uuml;BASCHRIFT&Auml;N </h2>
-			<p>
-				NOCH M&Auml;AR TEXT!!1!11!
-			</p>
-		</div>
-		<h1> SO VIL NEUUEEESSS!!111!11!11!11!!!1!1! </h1>
-		<br/>
-		<h1> j3tzt wieder norma1 </h1>
-		<div>
-			<table class="spielfeld">
-				<tr>
-					<th> </th>
-					<th>1</th>
-					<th>2</th>
-				</tr>
-				<tr>
-					<th>1</th>
-					<td>1</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<th>2</th>
-					<td>2</td>
-					<td>4</td>
-				</tr>
-			</table>
-		</div>
-	</body>
+    <head>
+		<meta charset="utf-8">
+        <title>textures</title>
+		<script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/kaboomen_consts.js"></script>
+		<script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/jquery.js"></script>
+		<script>
+			/*global c,$*/
+			var lastRev = 0;
+			function main() {
+				var s = '';				
+				for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++) {
+					for (var spalte = 0; spalte < c.SET_WIDTH; spalte++) {
+						s += '<div id="bgtile_' + zeile + '_' + spalte + '" class="tiles" style="top:' + (zeile * 32) + 'px;left:' + (spalte * 32) + 'px;width:32px;height:32px;position:absolute;background-position-x: 0%;"></div>';
+						s += '<div id="tile_' + zeile + '_' + spalte + '" class="tiles" style="top:' + (zeile * 32) + 'px;left:' + (spalte * 32) + 'px;width:32px;height:32px;position:absolute;background-position-x: -200%;"></div>';
+					}
+				}
+				setInterval(refresh, 50);
+				$('#spielfeld').html(s);
+			}
+			function refresh() {
+				$.get('http://kaboomen.de:8082/standard/' + lastRev, datenErhalten);
+			}
+			function datenErhalten(spielIn) {
+				if (spielIn == '' || spielIn == null) return;
+				var spiel = JSON.parse(spielIn);
+				lastRev = spiel.rev;
+				for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++) {
+					for (var spalte = 0; spalte < c.SET_WIDTH; spalte++) {
+						$('#tile_' + zeile + '_' + spalte).css('background-position-y', '000%');
+						if (spiel.map[zeile][spalte] == c.MAP_FLOOR) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '000%');
+							$('#tile_' + zeile + '_' + spalte).attr('class', 'tiles');
+						}else if(spiel.map[zeile][spalte] == c.MAP_WALL) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '-300%');
+							$('#tile_' + zeile + '_' + spalte).attr('class', 'tiles');
+						}else if(spiel.map[zeile][spalte] >= c.ITEM_BOMB
+								 && spiel.map[zeile][spalte] < c.FILTER_GOODIE) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '000%');
+							$('#tile_' + zeile + '_' + spalte).attr('class', 'bomb');
+						}else if(spiel.map[zeile][spalte] >= c.FILTER_GOODIE
+								 && spiel.map[zeile][spalte] < c.FILTER_BOMB) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '-400%');
+							$('#tile_' + zeile + '_' + spalte).attr('class', 'tiles');
+						}else if(spiel.map[zeile][spalte] >= c.FILTER_BOMB
+								 && spiel.map[zeile][spalte] < c.FILTER_BOX) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '-300%');
+							switch(spiel.map[zeile][spalte] - c.FILTER_BOMB) {
+							case c.MAP_BOMB_CENTER:
+													$('#tile_' + zeile + '_' + spalte).attr('class', 'expl_center');
+													break;
+							case c.MAP_BOMB_VERT:
+												  $('#tile_' + zeile + '_' + spalte).attr('class', 'expl_verti');
+												  break;
+							}
+						}else if(spiel.map[zeile][spalte] >= c.FILTER_BOX
+								 && spiel.map[zeile][spalte] < c.FILTER_PLAYER) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '-100%');
+							$('#tile_' + zeile + '_' + spalte).attr('class', 'tiles');
+						}else if(spiel.map[zeile][spalte] >= c.FILTER_PLAYER) {
+							$('#tile_' + zeile + '_' + spalte).css('background-position-x', '000%');
+							switch(spiel.men[((spiel.map[zeile][spalte] - c.FILTER_PLAYER)).toString()].direction) {
+							case c.MOVE_UP: $('#tile_' + zeile + '_' + spalte).css('background-position-y', '-800%');
+											break;
+							case c.MOVE_LEFT: $('#tile_' + zeile + '_' + spalte).css('background-position-y', '-900%');
+											  break;
+							case c.MOVE_DOWN: $('#tile_' + zeile + '_' + spalte).css('background-position-y', '-1000%');
+											  break;
+							case c.MOVE_RIGHT: $('#tile_' + zeile + '_' + spalte).css('background-position-y', '-1100%');
+												break;
+							}
+							$('#tile_' + zeile + '_' + spalte).attr('class', 'players');
+						}
+					}
+				}
+			}
+			
+			$(document).ready(main);
+		</script>
+        <style type="text/css">
+			.tiles{
+				background-size: 500% 100%;
+				background-image:url('images/tiles.png');
+			}
+			.players{
+				background-size: 1300% 2100%;
+				background-image:url('images/index.png');
+			}
+			.bomb{
+				background-size: 100% 100%;
+				background-image:url('images/bomb.png');
+			}
+			.expl_center{
+				background-size: 400% 100%;
+				background-image:url('images/expl_center');
+			}
+        </style>
+    </head>
+    <body>
+		<div id="spielfeld"></div>
+    </body>
 </html>

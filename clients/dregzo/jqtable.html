@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="common_lib/js/jquery.js"></script>
+        <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+        <script>
+            /*global c,$*/
+            function main () {
+                var s = '';
+                for (var i=0;i<c.SET_HEIGHT;i++) {
+                    s += '<tr>';
+                    for (var j=0;j<c.SET_WIDTH;j++) {
+                        s += '<td id="'+i+'_'+j+'">'+'xxx'+'</td>';
+                    }   
+                    s += '</tr>';
+                    $('#tabelle').html(s)
+                }
+                setInterval(refresh,100);
+            }
+            function refresh () {
+                $.getJSON('http://kaboomen.de:8081/standard/0',jsonisthere);
+            }
+            function jsonisthere(json) {
+                for (var i=0;i<c.SET_HEIGHT;i++) {
+                    for (var j=0;j<c.SET_WIDTH;j++) {
+                        $('#'+i+'_'+j).html(json.map[i][j]);    
+                    }
+                }
+            }
+            $(document).ready(main);
+        </script>
+        <style type="text/css">
+            td {border:1px solid black;}   
+        </style>
+    </head>
+    <body>
+        <table id="tabelle">
+        </table>
+    </body>
+</html>
