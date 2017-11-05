@@ -124,6 +124,19 @@ class Game {
 	}
 
 	/*
+	 * slow is over
+	 */
+	bombGoodieIsOver(man) {
+		if (man !== undefined) {
+			let before = man.getMaxBombs()+'/'+man.getBombs();
+			man.resetBombs();
+			let now = man.getMaxBombs()+'/'+man.getBombs();
+			winston.info("[player] %s bomb number regenerated %s => %s", man.getName(),before,now); //.getName()
+			this.commit();
+		}
+	}
+
+	/*
 	 * count down indestructibility
 	 */
 	indestructibleGoodieCountDown(man) {
@@ -289,13 +302,15 @@ class Game {
 				winston.info("[player] %s bomb radius decreased", man.getName());
 			}
 			else if (this.gameMap.isGoodieAtPosition(newX, newY, c.GOODIE_MORE_BOMB)) {
-				man.incBombs();
+				man.incMaxBombs();
 				this.makeNoise(c.SOUND_KEY_GOOD, man.getId());
+				setTimeout(this.bombGoodieIsOver.bind(this), c.TIME_FACTOR * c.TIME_REGENERATE_DOWN * 1000, man);
 				winston.info("[player] %s number of bombs increased", man.getName());
 			}
 			else if (this.gameMap.isGoodieAtPosition(newX, newY, c.GOODIE_LESS_BOMB)) {
-				man.decBombs();
+				man.decMaxBombs();
 				this.makeNoise(c.SOUND_KEY_BAD, man.getId());
+				setTimeout(this.bombGoodieIsOver.bind(this), c.TIME_FACTOR * c.TIME_REGENERATE_UP * 1000, man);
 				winston.info("[player] %s number of bombs decreased", man.getName());
 			}
 			else if (this.gameMap.isGoodieAtPosition(newX, newY, c.GOODIE_MORE_SPEED)) {
