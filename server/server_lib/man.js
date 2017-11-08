@@ -23,6 +23,15 @@ class Man {
 		this.countDown = c.START_COUNTDOWN;
 		this.x = 0;
 		this.y = 0;
+		this.lastAction = Date.now();
+	}
+	
+	doSomething() {
+		this.lastAction = Date.now();
+	}
+	
+	timeToDie(now) {
+		return this.lastAction + c.TIME_DIE_FOR_INACTIVITY*1000<now; 
 	}
 
 	setPosition(x, y) {

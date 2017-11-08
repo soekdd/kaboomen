@@ -91,9 +91,13 @@ class Game {
 				}
 			}
 		}
+		var now = Date.now();
 		for (var i in this.men) {
-			if (!this.men[i].isDying())
+			if (!this.men[i].isDying()) {
 				this.gameMap.setPlayerAtPosition(Math.round(this.men[i].getXPosition()), Math.round(this.men[i].getYPosition()), i);
+				if (this.men[i].timeToDie(now))
+					this.placeBomb(i);
+			}
 		}
 		if (this.gameMap.maintenance()) {
 			winston.info("[backend] map maintenanced");
@@ -342,6 +346,7 @@ class Game {
 			};
 		}
 		var man = this.men[manId];
+		man.doSomething();
 		var divX = 0;
 		var divY = 0;
 		if (!(man.isWaiting())) {
@@ -700,6 +705,7 @@ class Game {
 			};
 		}
 		var man = this.men[manId];
+		man.doSomething();
 		if (man.hasRemoteBomb()) {
 			winston.log('man has remote bombs');
 			var found = false;

@@ -30,6 +30,7 @@
 	exports.TIME_REGENERATE_UP = 30; // in seconds
 	exports.TIME_REGENERATE_DOWN = 90; // in seconds
 	exports.TIME_REGENERATE_EXTENDED = 15;
+	exports.TIME_DIE_FOR_INACTIVITY = 60; // in seconds
 
 	exports.SCORE_KILL = 100; // points for a kill
 	exports.SCORE_KILLP = 50; // percent of the score of the killed player
