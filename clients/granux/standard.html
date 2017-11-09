@@ -2,7 +2,7 @@
 <html>
     <head>
 		<meta charset="utf-8">
-        <title>textures</title>
+        <title>Kaboomen</title>
 		<script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/kaboomen_consts.js"></script>
 		<script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/jquery.js"></script>
 		<script>
@@ -49,9 +49,15 @@
 							switch(spiel.map[zeile][spalte] - c.FILTER_BOMB) {
 							case c.MAP_BOMB_CENTER:
 													$('#tile_' + zeile + '_' + spalte).attr('class', 'expl_center');
+													$('#tile_' + zeile + '_' + spalte).css('background-position-x', '-300%');
 													break;
+							case c.MAP_BOMB_HORI:
+												  $('#tile_' + zeile + '_' + spalte).attr('class', 'expl_hori');
+												  $('#tile_' + zeile + '_' + spalte).css('background-position-x', '-300%');
+												  break;
 							case c.MAP_BOMB_VERT:
 												  $('#tile_' + zeile + '_' + spalte).attr('class', 'expl_verti');
+												  $('#tile_' + zeile + '_' + spalte).css('background-position-x', '-300%');
 												  break;
 							}
 						}else if(spiel.map[zeile][spalte] >= c.FILTER_BOX
@@ -93,7 +99,15 @@
 			}
 			.expl_center{
 				background-size: 400% 100%;
-				background-image:url('images/expl_center');
+				background-image:url('images/expl_center.png');
+			}
+			.expl_hori{
+				background-size: 400% 100%;
+				background-image:url('images/expl_hori.png');
+			}
+			.expl_verti{
+				background-size: 400% 100%;
+				background-image:url('images/expl_verti.png');
 			}
         </style>
     </head>

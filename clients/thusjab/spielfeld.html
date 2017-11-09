@@ -5,19 +5,23 @@
         <script type="text/javascript" src="common_lib/js/jquery.js"></script>
 	    <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
         <style>
-            
+            #spielfeld {position:relative;}
+            .pic {position:absolute;}
+            .tile {}
+            .wall {}
+            .ch1 {}
+            .ch2 {}
+            .ch3 {}
         </style>
         <script>
             var lastRev = 0;
             var main = function(){
                 /*global c,$*/
-                var s = 0;
+                var s = '';
                 for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++) {
-                    s += '<tr>';
                     for (var spalte = 0; spalte < c.SET_WIDTH; spalte++){
-                        s += '<td id="'+zeile+'_'+spalte+'"></td>';
+                        s += '<div id="'+zeile+'_'+spalte+'" class="pic" style="top:'+zeile*64+'px; left:'+spalte*64+'px"></div>';
                     }
-                    s += '</tr>';
                 }
                 $('#spielfeld').html(s);
                 refresh();
@@ -37,6 +41,6 @@
         </script>
     </head>
     <body>
-        <table id="spielfeld"></table>
+        <div id="spielfeld"></div>
     </body>
 </html>

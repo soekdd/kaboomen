@@ -1,0 +1,82 @@
+.bg{
+	background-size: 1300% 100%;
+	background-image: url('images/bg.png');
+	transform: none;
+    background-position-y: -0%;
+}
+
+.white{
+    background-position-x: -0%;
+}
+
+.yellow{
+    background-position-x: -100%;
+}
+
+.red{
+    background-position-x: -200%;
+}
+
+.blue{
+    background-position-x: -300%;
+}
+
+.purple{
+    background-position-x: -400%;
+}
+
+.green{
+    background-position-x: -500%;
+}
+
+.gray{
+    background-position-x: -600%;
+}
+
+.wall{
+    background-position-x: -700%;
+}
+
+.wall_end{
+    background-position-x: -800%;
+}
+
+.wall_edge{
+    background-position-x: -900%;
+}
+
+.wall_middle_gray{
+    background-position-x: -1000%;
+}
+
+.wall_middle_green{
+    background-position-x: -1100%;
+}
+
+.wall_middle_red{
+    background-position-x: -1200%;
+}
+
+.rotate_90{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate_180{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate_-90{
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}

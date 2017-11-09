@@ -1,0 +1,64 @@
+<html>
+    <head>
+       <script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/jquery.js"></script>
+       <script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/kaboomen_consts.js"></script>
+       <style>
+           #spielfeld{position:relative;}
+           .tile{position:absolute;}
+       </style>
+       <script>
+           /*global c,$*/
+           var lastRev = 0;
+           var main = function(){
+               var s = '';
+               for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
+                    for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) {
+                        s += '<div class="tile" style="top:'+(zeile*32)+'px;left:'+(spalte*32)+'px" id="'+zeile+'_'+spalte+'">';
+                        s += '</div>';
+                    }
+               }
+               $('#spielfeld').html(s);
+               var testVar = ["hallo",5,-3.14];
+               var testObj = {"gruss":"hallo","zahl":5,"negkreiszahl":-3.14};
+                /*testVar.forEach(function(element){
+                    $('#hilfsfeld').append(element);       
+               });*/
+                for(var i=0;i<testVar.length;i++) {
+                   var element = testVar[i];
+                   $('#hilfsfeld').append(element);       
+               }
+               refresh;
+               setInterval(refresh,100);
+           };
+           var refresh = function(){
+               $.getJSON('http://kaboomen.de:8082/standard/'+lastRev,datenErhalten);
+           }
+           var datenErhalten = function(spiel){
+               
+               /*for(var i=0;i<spiel.map[0].length;i++) {
+                   var element = spiel.map[0][i];
+               }*/
+               var s = "";
+               for(key in spiel.men) {
+                   s += spiel.men[key].name+ "&nbsp;";
+               }
+               lastRev = spiel.rev;
+               for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
+                    for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
+                    {
+                      document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
+                    }
+               }
+           }
+           $(document).ready(main);
+       </script>
+    </head>
+    <body>
+        <div id="spielfeld">
+            
+        </div>
+        <div id="hilfsfeld">
+            
+        </div>
+    </body>
+</html>

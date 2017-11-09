@@ -3,7 +3,9 @@
        <script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/jquery.js"></script>
        <script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/kaboomen_consts.js"></script>
        <style>
-           td {border:1px solid black;}
+           #spielfeld{position:relative;}
+           .tile{position:absolute;background-image:url(../img/back.jpg);}
+           #hilfsfeld{position:absolute;top:640px;}
        </style>
        <script>
            /*global c,$*/
@@ -11,15 +13,22 @@
            var main = function(){
                var s = '';
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
-                    s += '<tr>';
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) {
-                        s += '<td id="'+zeile+'_'+spalte+'">';
-                        s += '</td>';
+                        s += '<div class="tile" style="top:'+(zeile*32)+'px;left:'+(spalte*32)+'px" id="'+zeile+'_'+spalte+'">';
+                        s += '</div>';
                     }
-                    s += '</tr>';     
                }
                $('#spielfeld').html(s);
-               refresh();
+               var testVar = ["hallo",5,-3.14];
+               var testObj = {"gruss":"hallo","zahl":5,"negkreiszahl":-3.14};
+                /*testVar.forEach(function(element){
+                    $('#hilfsfeld').append(element);       
+               });*/
+                for(var i=0;i<testVar.length;i++) {
+                   var element = testVar[i];
+                   $('#hilfsfeld').append(element);       
+               }
+               refresh;
                setInterval(refresh,100);
            };
            var refresh = function(){
@@ -27,24 +36,19 @@
            }
            var datenErhalten = function(spiel){
                
-               spiel.map[0].forEach((element)=>{
-                   
-               });
-               
-               for(var i=0;i<spiel.map[0].length;i++) {
+               /*for(var i=0;i<spiel.map[0].length;i++) {
                    var element = spiel.map[0][i];
-               }
+               }*/
                var s = "";
                for(key in spiel.men) {
                    s += spiel.men[key].name+ "&nbsp;";
                }
-               console.log(s);
-               $('#hilfsfeld').html(s);
                lastRev = spiel.rev;
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
                     {
                       document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
+                      $('#'+zeile+'_'+spalte).html()
                     }
                }
            }
@@ -52,9 +56,9 @@
        </script>
     </head>
     <body>
-        <table id="spielfeld">
+        <div id="spielfeld">
             
-        </table>
+        </div>
         <div id="hilfsfeld">
             
         </div>

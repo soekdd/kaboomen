@@ -127,8 +127,14 @@
                     }   
                     s += '</tr>';
                     $('#tabelle').html(s);
+                    //document.getElementById('tabelle') = s; //Vanilla JS
                 }
+                refresh();
                 setInterval(refresh,100);
+                //Moeglichkeiten, die callback Funktion als Parameter mitzugeben
+                //setInterval(refresh,100,callback);
+                //setInterval(function(){refresh(callback)},100);
+                //setInterval(()=>{refresh(callback)},100);
             }
             function refresh () {
                 $.getJSON('http://kaboomen.de:8081/standard/'+rev,jsonisthere);
@@ -137,6 +143,7 @@
                 for (var i=0;i<c.SET_HEIGHT;i++) {
                     for (var j=0;j<c.SET_WIDTH;j++) {
                         $('#'+i+'_'+j).html(getpic(i,j,json));    
+                        //document.getElementById(i+'_'+j) = getpic(i,j,json); //Vanilla JS
                     }
                 }
                 rev = json.rev;

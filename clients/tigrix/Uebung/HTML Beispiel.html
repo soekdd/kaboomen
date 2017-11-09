@@ -1,27 +1,42 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE: html>
 <html>
-	<head>
-		<style>
-			td , th {border:1px solid red;font-size:20px}
-			.spielfeld {border:15px solid red;font-size:2022px} 
-			.spielfeld td {border:10px solid red;font-size:20px;background-color:#e50dcc}
-			.test1 {color:green}
-		</style>
-	</head>
-	<body>
-		<h1>Hällo Lennart!</h1>
-		Ne Spass :(
-		<div>
-			<h1>erster Div-Container!</h1>
-		</div>
-			<table class="spielfeld">
-				<tr>
-					<th style="color:red;text-decoration:underline">Hallo Kaboomen!</th>
-				</tr>
-				<tr>
-					<td>I Bims <span class="test1">1</span>  Kaboomen</td>
-				</tr>
-			</table>
-		
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="common_lib/js/jquery.js"></script>
+	    <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+        <style>
+            
+        </style>
+        <script>
+            var lastRev = 0;
+            var main = function(){
+                /*global c,$*/
+                var s = 0;
+                for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++) {
+                    s += '<tr>';
+                    for (var spalte = 0; spalte < c.SET_WIDTH; spalte++){
+                        s += '<td id="'+zeile+'_'+spalte+'"></td>';
+                    }
+                    s += '</tr>';
+                }
+                $('#spielfeld').html(s);
+                refresh();
+                setInterval(refresh,100);
+            };             var refresh = function(){
+                $.getJSON('http://kaboomen.de:8082/standard/'+lastRev, datenErhalten);
+            }
+            var datenErhalten = function(spiel){
+                lastRev = spiel.rev;
+                for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++){
+                    for (var spalte = 0; spalte < c.SET_WIDTH; spalte++){
+                        document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
+                    }
+                }
+            };
+            $(document).ready(main);
+        </script>
+    </head>
+    <body>
+        <table id="spielfeld"></table>
+    </body>
 </html>

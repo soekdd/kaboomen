@@ -42,10 +42,11 @@
 	exports.MAP_BOX = 0x41;
 
 	exports.ITEM_BOMB = 0x03;
-	exports.FILTER_PLAYER = 0x0100;
-	exports.FILTER_BOMB = 0x0020;
-	exports.FILTER_BOX  = 0x0040;
-	exports.FILTER_GOODIE = 0x0010;
+	exports.FILTER_PLAYER = 0x0100;//256
+	exports.FILTER_BOMB = 0x0020;  //32
+	exports.FILTER_BOX  = 0x0040;  //64
+	exports.FILTER_GOODIE = 0x0010;//16
+	exports.FILTER_GROUP = 0x001F0;//Bit 8...4
 	
 	exports.GOODIE_MORE_EXPL = 0x01;
 	exports.GOODIE_LESS_EXPL = 0x02;
@@ -93,13 +94,15 @@
 		return exports.BAD_GOODIES.indexOf(e) > -1;
 	};
 	exports.isGoodie = function(e) {
-		return (e & exports.FILTER_GOODIE) == exports.FILTER_GOODIE;
+		return (e & exports.FILTER_GROUP) == exports.FILTER_GOODIE;
 	};
-	exports.isBox = function(e) {
-		return (e & exports.FILTER_BOX) == exports.FILTER_BOX;
+
+    exports.isBox = function(e) {
+		return (e & exports.FILTER_GROUP) == exports.FILTER_BOX;
 	};
+	
 	exports.isPlayer = function(e) {
-		return (e & exports.FILTER_PLAYER) == exports.FILTER_PLAYER;
+		return e > exports.FILTER_PLAYER;
 	};
 	exports.isWalkable = function(e) {
 		return (e == exports.MAP_FLOOR) || exports.isGoodie(e) || ((e & exports.FILTER_BOMB) == exports.FILTER_BOMB);
@@ -114,7 +117,7 @@
 		return e != exports.MAP_WALL;
 	};
 	exports.isRemoveable = function(e) {
-		return ((e & exports.FILTER_BOX) == exports.FILTER_BOX) || (e == exports.ITEM_BOMB) || exports.isGoodie(e) || exports.isPlayer(e);
+		return ((e & exports.FILTER_GROUP) == exports.FILTER_BOX) || (e == exports.ITEM_BOMB) || exports.isGoodie(e) || exports.isPlayer(e);
 	};
 	exports.isUndestroyable = function(e) {
 		return e == exports.MAP_WALL;

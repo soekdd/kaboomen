@@ -11,6 +11,10 @@
 				let s = '';
 				for(let zeile=0; zeile<c.SET_HEIGHT; zeile++){
 					for(let spalte=0; spalte<c.SET_WIDTH; spalte++){
+						s += '<div class="bg_div static_bg" ';
+						s += 'style="top:'+(32*zeile)+'px; ';
+						s += 'left:'+(32*spalte)+'px;"></div>';
+						
 						s += '<div class="bg_div" ';
 						s += 'id="'+zeile+'_'+spalte+'"';
 						s += 'style="top:'+(32*zeile)+'px; ';
@@ -36,10 +40,11 @@
 				}
 			}
 			function getDivClass(f_value){
-				if(f_value == 0){
-					return "grnd";
-				}else{
-					return "wall";
+				switch(f_value){
+					case 1:
+						return "wall";
+					default:
+						return "";
 				}
 			}
 			$(document).ready(main);
@@ -61,15 +66,24 @@
                 /*top:0px;
                 left:0px;*/
 			}
-			.grnd {
-				background-image: url('../src/ground.png');
-                background-size: 2000% 200%;
-				background-position: -500% -100%;
+			.static_bg {
+				background-image: url('../src/custom_tilesheet.png');
+				background-size: 1000% 1000%;
+				background-position: -100% -100%;
 			}
 			.wall {
-				background-image: url('../src/ground.png');
-                background-size: 2000% 200%;
-				background-position: -0% -0%;
+				background-image: url('../src/custom_tilesheet.png');
+				background-size: 1000% 1000%;
+				background-position: -200% -00%;
+			}
+			.box_3 {
+				
+			}
+			.box_2 {
+				
+			}
+			.box_1 {
+				
 			}
 		</style>
 	</head>
