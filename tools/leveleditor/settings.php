@@ -1,6 +1,6 @@
 <?php
 $c = [
-    'levelFolder' => '../__server/level',
+    'levelFolder' => '../../server/level',
     'levelExtension' => 'json'
 ];
 
