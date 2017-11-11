@@ -43,9 +43,17 @@ the difficulty of the APIs to the age of the students.
 
 |API|recommend student's age|address and usage|supported features|
 |---|---|---|---|
-|simple|below 14y old|**http(s)://server:port** or <br>**http(s)://server:port/simple**   |moving players field by field (chess like)|
-|standard|15y - 16y old|**http(s)://server:port/standard/[revNum]** <br>..sending last revision number to avoid double updates|animation support, <br>pixel-wise movement of players,<br> additional information about players and bombs,<br>sound available|
-|extended|older than 16y old|**http(s)://server:port/extended/[revNum]** <br>...sending last revision number to avoid double updates<br>**http(s)://server:port/map**<br>...getting static map|different background support,<br>map is not part of updates anymore|
+|simple|below 14y old|**http(s)://server:port** **([try](http://kaboomen.de:8081/))** or <br>**http(s)://server:port/simple** **([try](http://kaboomen.de:8081/simple))**|moving players field by field (chess like)|
+|standard|15y - 16y old|**http(s)://server:port/standard/[revNum]** **([try](http://kaboomen.de:8081/standard/0))**<br>..sending last revision number to avoid double updates|animation support, <br>pixel-wise movement of players,<br> additional information about players and bombs,<br>sound available|
+|extended|older than 16y old|**http(s)://server:port/extended/[revNum]** **([try](http://kaboomen.de:8081/extended/0))**<br>...sending last revision number to avoid double updates<br>**http(s)://server:port/map** **([try](http://kaboomen.de:8081/map))**<br>...getting static map|different background support,<br>map is not part of updates anymore|
+|websocket|for those who already got everything|**ws(s)://server:port/extended**|getting game updates without polling using server push|
+
+### sending commands back to server (api independent) ###
+
+1. Login by **ws(s)://server:port/create/[playersName]** **([try](http://kaboomen.de:8081/create/testPlayer))**
+2. Getting response as comma seperated list: **[authId],[playerID]**
+3. Store both values in global variables
+4. Sending commands to server **http(s)://server:port/[playerID]/[left|right|up|down|bomb]**   
 
 ### simple API
 
