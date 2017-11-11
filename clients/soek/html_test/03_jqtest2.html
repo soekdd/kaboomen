@@ -1,11 +1,9 @@
 <html>
     <head>
-       <script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/jquery.js"></script>
-       <script type="text/javascript" src="http://kaboomen.de/soek/common_lib/js/kaboomen_consts.js"></script>
+       <script type="text/javascript" src="../common_lib/js/jquery.js"></script>
+       <script type="text/javascript" src="../common_lib/js/kaboomen_consts.js"></script>
        <style>
-           #spielfeld{position:relative;}
-           .tile{position:absolute;background-image:url(../img/back.jpg);}
-           #hilfsfeld{position:absolute;top:640px;}
+           td {border:1px solid black;}
        </style>
        <script>
            /*global c,$*/
@@ -13,10 +11,12 @@
            var main = function(){
                var s = '';
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
+                    s += '<tr>';
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) {
-                        s += '<div class="tile" style="top:'+(zeile*32)+'px;left:'+(spalte*32)+'px" id="'+zeile+'_'+spalte+'">';
-                        s += '</div>';
+                        s += '<td id="'+zeile+'_'+spalte+'">';
+                        s += '</td>';
                     }
+                    s += '</tr>';     
                }
                $('#spielfeld').html(s);
                var testVar = ["hallo",5,-3.14];
@@ -28,7 +28,7 @@
                    var element = testVar[i];
                    $('#hilfsfeld').append(element);       
                }
-               refresh;
+               refresh();
                setInterval(refresh,100);
            };
            var refresh = function(){
@@ -47,8 +47,7 @@
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
                     {
-                      document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
-                      $('#'+zeile+'_'+spalte).html()
+                      document.getElementById(zeile+'_'+spalte).innerHTML=c.getClassOfTile(spiel.map[zeile][spalte]);
                     }
                }
            }
@@ -56,9 +55,9 @@
        </script>
     </head>
     <body>
-        <div id="spielfeld">
+        <table id="spielfeld">
             
-        </div>
+        </table>
         <div id="hilfsfeld">
             
         </div>

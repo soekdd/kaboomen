@@ -57,6 +57,17 @@
 	exports.GOODIE_INDESTRUCTIBLE = 0x07;
 	exports.GOODIE_STRONGBOMB = 0x08;
 	exports.GOODIE_REMOTEBOMB = 0x09;
+	
+	exports.GOODIES_EXPLAINED = {};
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_MORE_EXPL]      = 'MoreExplosion';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_LESS_EXPL]      = 'LessExplosion';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_MORE_BOMB]      = 'MoreBombs';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_LESS_BOMB]      = 'LessBombs';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_MORE_SPEED]     = 'MoreSpeed';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_LESS_SPEED]     = 'LessSpeed';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_INDESTRUCTIBLE] = 'Indestructible';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_STRONGBOMB]     = 'StrongBombs';
+	exports.GOODIES_EXPLAINED[exports.FILTER_GOODIE | exports.GOODIE_REMOTEBOMB]     = 'RemoteBombs';
 
 	exports.MAP_BOMB_CENTER = 0x01;
 	exports.MAP_BOMB_HORI   = 0x02;
@@ -65,14 +76,23 @@
 	exports.MAP_BOMB_ENDR   = 0x05;
 	exports.MAP_BOMB_ENDT   = 0x06;
 	exports.MAP_BOMB_ENDB   = 0x07;
-
-	exports.MOVE_DOWN = 0x01;
-	exports.MOVE_UP = 0x02;
-	exports.MOVE_LEFT = 0x03;
+	
+	exports.BOMB_EXPLAINED = {};
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_CENTER] = 'Center';
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_HORI]   = 'Horizontal';
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_VERT]   = 'Vertical';
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_ENDL]   = 'EndLeft';
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_ENDR]   = 'EndRight';
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_ENDT]   = 'EndTop';
+	exports.BOMB_EXPLAINED[exports.FILTER_BOMB | exports.MAP_BOMB_ENDB]   = 'EndBottom';
+	
+	exports.MOVE_DOWN  = 0x01;
+	exports.MOVE_UP    = 0x02;
+	exports.MOVE_LEFT  = 0x03;
 	exports.MOVE_RIGHT = 0x04;
-	exports.WAITS = 0x00;
-	exports.DIES = 0x05;
-	exports.MOVES = 0x06;
+	exports.WAITS      = 0x00;
+	exports.DIES       = 0x05;
+	exports.MOVES      = 0x06;
 	exports.ADMIN_PASS = 0x12345;
 	
 	exports.EXTMAP_FILTER_BOX = 0x03;       //00000011
@@ -100,6 +120,10 @@
     exports.isBox = function(e) {
 		return (e & exports.FILTER_GROUP) == exports.FILTER_BOX;
 	};
+
+    exports.isExplosion = function(e) {
+		return (e & exports.FILTER_GROUP) == exports.FILTER_BOMB;
+	};
 	
 	exports.isPlayer = function(e) {
 		return e > exports.FILTER_PLAYER;
@@ -122,5 +146,16 @@
 	exports.isUndestroyable = function(e) {
 		return e == exports.MAP_WALL;
 	};
+	
+	exports.getClassOfTile = function(tile) {
+		if (tile==exports.MAP_FLOOR) return 'mapFloor';
+		if (tile==exports.MAP_WALL) return 'mapWall';
+		if (exports.isBox(tile)) return 'mapBox'+(tile - exports.FILTER_BOX); 
+		if (tile==exports.ITEM_BOMB) return 'mapBomb';
+		if (exports.isGoodie(tile)) return 'mapGoodie goodie'+exports.GOODIES_EXPLAINED[tile];
+		if (exports.isExplosion(tile)) return 'mapExplosion explosion'+exports.BOMB_EXPLAINED[tile]; 
+		if (exports.isPlayer(tile)) return 'mapPlayer player'+(tile - exports.FILTER_PLAYER); 
+		return 'mapUnknown';
+	}
 
 })(typeof exports === 'undefined' ? this['c'] = {} : exports);
