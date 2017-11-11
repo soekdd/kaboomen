@@ -17,8 +17,8 @@ cd ..
 cp node_modules/audiojs/audiojs/*.js common_lib/js/
 cp node_modules/audiojs/audiojs/*.swf common_lib/js/
 cp node_modules/audiojs/audiojs/*.as common_lib/js/
-ln -s node_modules/kaboomen_ai.js common_lib/js/kaboomen_ai.js
-ln -s node_modules/kaboomen_consts.js common_lib/js/kaboomen_consts.js   
+ln -s ../../server_lib/kaboomen_ai.js common_lib/js/kaboomen_ai.js
+ln -s ../../server_lib/kaboomen_consts.js common_lib/js/kaboomen_consts.js   
 cd ..
 rm clients/soek/common_lib
 rm clients/anna/common_lib
