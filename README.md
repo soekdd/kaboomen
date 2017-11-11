@@ -65,24 +65,24 @@ Map elements and filters:
 
 |value dec|value hex|meaning|kaboomen_consts.js var|
 |---------|---------|-------|-----------------------|
-|0        |0x00     |floor  |MAP_FLOOR|
-|1        |0x01     |wall   |MAP_WALL|
-|3        |0x03     |bomb   |ITEM_BOMB|
+|0        |0x000    |floor  |MAP_FLOOR|
+|1        |0x001    |wall   |MAP_WALL|
+|3        |0x003    |bomb   |ITEM_BOMB|
 |16..31   |0x010..  |goodies plus goodie-id|FILTER_GOODIE|
 |32..63   |0x020..  |explosion plus it's part|FILTER_BOMBS|
-|64..67   |0x40     |box plus life left|FILTER_BOX|
+|64..67   |0x040..  |box plus life left|FILTER_BOX|
 |256..    |0x100..  |player plus it's id|FILTER_PLAYER|
 
 Goodies:
 
 |value additional to it's filter|meaning|kaboomen_consts.js var|
-|-------------------------------|-------|-----------------------|
-|1|good goodie: increase bombs radius|GOODIE_MORE_EXPL|
-|2|bad goodie: decrease bombs radius|GOODIE_LESS_EXPL|
-|3|good goodie: increase number of bombs|GOODIE_MORE_BOMB|
-|4|bad goodie: decrease number of bombs|GOODIE_LESS_BOMB|
-|5|good goodie: increase speed of player|GOODIE_MORE_SPEED|
-|6|bad goodie: decrease speed of player|GOODIE_LESS_SPEED|
+|-------------------------------|-------|----------------------|
+|1|good goodie: increase bombs radius   |GOODIE_MORE_EXPL      |
+|2|bad goodie: decrease bombs radius    |GOODIE_LESS_EXPL      |
+|3|good goodie: increase number of bombs|GOODIE_MORE_BOMB      |
+|4|bad goodie: decrease number of bombs |GOODIE_LESS_BOMB      |
+|5|good goodie: increase speed of player|GOODIE_MORE_SPEED     |
+|6|bad goodie: decrease speed of player |GOODIE_LESS_SPEED     |
 |7|special goodie: player will be indestructible|GOODIE_INDESTRUCTIBLE|
 |8|special goodie: player will get stronger bombs|GOODIE_STRONGBOMB|
 |9|special goodie: player will get remote bombs|GOODIE_REMOTEBOMB|
@@ -90,14 +90,14 @@ Goodies:
 Explosions:
 
 |value additional to it's filter|part of explosion|kaboomen_consts.js var|
-|-------------------------------|-------|-----------------------|
-|1|center|MAP_BOMB_CENTER|
-|2|horizontal|MAP_BOMB_HORI|
-|3|vertical|MAP_BOMB_VERT|
-|4|end of left|MAP_BOMB_ENDL|
-|5|end of right|MAP_BOMB_ENDR|
-|6|end of top|MAP_BOMB_ENDT|
-|7|end of bottom|MAP_BOMB_ENDT|
+|-------------------------------|-----------------|----------------------|
+|1                              |center           |MAP_BOMB_CENTER       |
+|2                              |horizontal       |MAP_BOMB_HORI         |
+|3                              |vertical         |MAP_BOMB_VERT         |
+|4                              |end of left      |MAP_BOMB_ENDL         |
+|5                              |end of right     |MAP_BOMB_ENDR         |
+|6                              |end of top       |MAP_BOMB_ENDT         |
+|7                              |end of bottom    |MAP_BOMB_ENDT         |
 
 Example:
 
