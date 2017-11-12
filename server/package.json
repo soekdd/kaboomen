@@ -7,6 +7,10 @@
     "common_lib": "common_lib",
     "server_lib": "server_lib"
   },
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/soekdd/kaboomen.git"
+  },
   "dependencies": {
     "events": "^1.1.1",
     "http": "^0.0.0",

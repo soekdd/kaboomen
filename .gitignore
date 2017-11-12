@@ -1,5 +1,6 @@
-/server/common_lib
-/server/node_modules
+common_lib
+common_lib/*
+server/node_modules
 .c9/*
 .c9
 *.log
