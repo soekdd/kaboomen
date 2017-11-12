@@ -11,6 +11,9 @@ cp node_modules/angular/*.js common_lib/js/
 cp node_modules/angular/*.map common_lib/js/
 cp node_modules/socket.io-client/dist/* common_lib/js/
 cp node_modules/base64-js/base64js.min.js common_lib/js/
+cd node_modules
+git clone https://github.com/kolber/audiojs.git audiojs
+cd ..
 cp node_modules/audiojs/audiojs/*.js common_lib/js/
 cp node_modules/audiojs/audiojs/*.swf common_lib/js/
 cp node_modules/audiojs/audiojs/*.as common_lib/js/
