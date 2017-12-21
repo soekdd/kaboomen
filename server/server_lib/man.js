@@ -12,9 +12,9 @@ class Man {
 		this.bombs = c.START_BOMBS;
 		this.maxBombs = c.START_BOMBS;
 		this.score = 0;
-		this.next = '';
+		this.next = 0;
 		this.action = c.WAITS;
-		this.direction = 0;
+		this.direction = c.MOVE_DOWN;
 		this.id = manId;
 		this.indest = 0;
 		this.hasSBomb = 0;
