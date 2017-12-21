@@ -53,12 +53,12 @@ function changeServer() {
         men: []
     });
     main();
-    if (connectionType == "sockets") {
+    //if (connectionType == "sockets") {
         sendUpdateOrder();
         if (updateRequest!=null)
             clearInterval(updateRequest);
         updateRequest = setInterval(sendUpdateOrder, 5000);
-    }
+    //}
 }
 
 function createMap(ground) {
@@ -450,12 +450,17 @@ function getGroundMap(callback) {
 function getData(result) {
     start = new Date().getTime();
     if (result == '') return;
-    var game = JSON.parse(result);
+    var game;
+    //if (connectionType == 'sockets') 
+    if (typeof result != 'object')
+        game = JSON.parse(result);
+    else 
+        game = result;
     rev = game.rev;
     if (oldGame == 0) {
         getGroundMap(function(groundResult) {
             oldGame = 0; //könnte schon wieder überschrieben worden sein.
-            createMap(JSON.parse(groundResult));
+            createMap(groundResult);
             updateExtended(game);
         });
     }
