@@ -511,6 +511,7 @@ class Game {
 			while ((i < (r + 1)) && (this.gameMap.isDestroyable(x + i, y)) && (x + i < this.width) && bomb.compareMax('r', i)) {
 				if (bomb.isNotStrong() && this.gameMap.isRemoveable(x + i, y)) bomb.setMax('r', i);
 				if (i == r) this.destroys(x + i, y, c.MAP_BOMB_HORI, bomb);
+				this.gameMap.setTile(x + i - 1, y, c.FILTER_BOMB | c.MAP_BOMB_HORI);
 				i++;
 			}
 			//this.destroys(x + i - 1, y, c.MAP_BOMB_ENDR, bomb);
@@ -524,6 +525,7 @@ class Game {
 			while (i < (r + 1) && (this.gameMap.isDestroyable(x - i, y)) && (x - i > 0) && bomb.compareMax('l', i)) {
 				if (bomb.isNotStrong() && this.gameMap.isRemoveable(x - i, y)) bomb.setMax('l', i);
 				if (i == r) this.destroys(x - i, y, c.MAP_BOMB_HORI, bomb);
+				this.gameMap.setTile(x - i + 1, y, c.FILTER_BOMB | c.MAP_BOMB_HORI);
 				i++;
 			}
 			//this.destroys(x - i + 1, y, c.MAP_BOMB_ENDL, bomb);
@@ -537,6 +539,7 @@ class Game {
 			while (i < (r + 1) && (this.gameMap.isDestroyable(x, y + i)) && (y + i < this.height) && bomb.compareMax('b', i)) {
 				if (bomb.isNotStrong() && this.gameMap.isRemoveable(x, y + i)) bomb.setMax('b', i);
 				if (i == r) this.destroys(x, y + i, c.MAP_BOMB_VERT, bomb);
+				this.gameMap.setTile(x, y + i - 1, c.FILTER_BOMB | c.MAP_BOMB_VERT);
 				i++;
 			}
 			//this.destroys(x, y + i - 1, c.MAP_BOMB_ENDB, bomb);
@@ -550,6 +553,7 @@ class Game {
 			while (i < (r + 1) && (this.gameMap.isDestroyable(x, y - i)) && (y - i > 0) && bomb.compareMax('t', i)) {
 				if (bomb.isNotStrong() && this.gameMap.isRemoveable(x, y - i)) bomb.setMax('t', i);
 				if (i == r) this.destroys(x, y - i, c.MAP_BOMB_VERT, bomb);
+				this.gameMap.setTile(x, y - i + 1, c.FILTER_BOMB | c.MAP_BOMB_VERT);
 				i++;
 			}
 			//this.destroys(x, y - i + 1, c.MAP_BOMB_ENDT, bomb);
