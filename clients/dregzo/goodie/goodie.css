@@ -1,0 +1,39 @@
+#goodies {
+    position: absolute;
+}
+
+.goodie {
+    background-image: url(http://kaboomen.de/soek/img/goodie.png);
+    background-size: 1000%, 100%;
+    position: absolute;
+    z-index: 1;
+    background-position-y: 0%;
+}
+
+.goodie_1 {
+    background-position-x: 0%;
+}
+.goodie_2 {
+    background-position-x: -100%;
+}
+.goodie_3 {
+    background-position-x: -200%;
+}
+.goodie_4 {
+    background-position-x: -300%;
+}
+.goodie_5 {
+    background-position-x: -400%;
+}
+.goodie_6 {
+    background-position-x: -500%;
+}
+.goodie_7 {
+    background-position-x: -600%;
+}
+.goodie_8 {
+    background-position-x: -700%;
+}
+.goodie_9 {
+    background-position-x: -800%;
+}

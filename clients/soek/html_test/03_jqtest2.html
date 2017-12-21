@@ -47,7 +47,8 @@
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
                     {
-                      document.getElementById(zeile+'_'+spalte).innerHTML=c.getClassOfTile(spiel.map[zeile][spalte]);
+                      document.getElementById(zeile+'_'+spalte).setAttribute("class",c.getClassOfTileStandard(spiel.map[zeile][spalte]));
+                      document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
                     }
                }
            }

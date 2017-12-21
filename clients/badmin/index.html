@@ -1,13 +1,32 @@
-<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript" src="common_lib/js/jquery.js"></script>
-	<script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
-	<style>
-           td {border:1px solid black;}
+    <head>
+       <script type="text/javascript" src="common_lib/js/jquery.js"></script>
+       <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+       <style>
+           table{ border-spacing:0}
+           td {border:0px solid black;}
+           .map{
+               width: 32px;
+               height: 32px;
+           }
+           .mapFloor, .mapGoodie{
+               background-color: DarkGreen;
+           }
+           .mapWall{
+               background-color: Gray;
+           }
+           .mapBox1, .mapBox2, .mapBox3{
+               background-color: SaddleBrown;
+           }
+           .mapBomb{
+              background-image: url("img/bomb.gif");
+           }
+           .mapExplosion{
+               background-image: url("img/explosion.png");
+           }
+           .mapPlayer{
+               background-image: url("img/character_positioned.png");
+           }
        </style>
        <script>
            /*global c,$*/
@@ -23,6 +42,15 @@
                     s += '</tr>';     
                }
                $('#spielfeld').html(s);
+               var testVar = ["hallo",5,-3.14];
+               var testObj = {"gruss":"hallo","zahl":5,"negkreiszahl":-3.14};
+                /*testVar.forEach(function(element){
+                    $('#hilfsfeld').append(element);       
+               });*/
+                for(var i=0;i<testVar.length;i++) {
+                   var element = testVar[i];
+                   $('#hilfsfeld').append(element);       
+               }
                refresh();
                setInterval(refresh,100);
            };
@@ -31,24 +59,19 @@
            }
            var datenErhalten = function(spiel){
                
-               spiel.map[0].forEach((element)=>{
-                   
-               });
-               
-               for(var i=0;i<spiel.map[0].length;i++) {
+               /*for(var i=0;i<spiel.map[0].length;i++) {
                    var element = spiel.map[0][i];
-               }
+               }*/
                var s = "";
                for(key in spiel.men) {
                    s += spiel.men[key].name+ "&nbsp;";
                }
-               console.log(s);
-               $('#hilfsfeld').html(s);
                lastRev = spiel.rev;
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
                     {
-                      document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
+                      document.getElementById(zeile+'_'+spalte).setAttribute("class","map "+c.getClassOfTileSimple(spiel.map[zeile][spalte]));
+                      
                     }
                }
            }

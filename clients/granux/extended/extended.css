@@ -5,6 +5,13 @@
     background-position-y: -0%;
 }
 
+.box{
+    background-size: 300% 100%;
+    background-image: url('images/boxes.png');
+    transform: none;
+    background-position-y: -0%;
+}
+
 .white{
     background-position-x: -0%;
 }

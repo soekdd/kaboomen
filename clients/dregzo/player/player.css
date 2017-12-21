@@ -1,1 +1,58 @@
 /*embed stylesheet this way: <link rel="stylesheet" href="src">*/
+.player {
+    background-image: url(player.png);
+    background-size: 900%, 500%;
+    position: absolute;
+    z-index: 5;
+}
+.player_walk_2 {
+    background-position-y: -0%;
+}
+.player_walk_3 {
+    background-position-y: -100%;
+}
+.player_walk_1 {
+    background-position-y: -200%;
+}
+.player_walk_4 {
+    background-position-y: -300%;
+}
+.player_die {
+    background-position-y: -400%;
+}
+.player_proc_0 {
+    background-position-x: -0%;
+}
+.player_proc_1 {
+    background-position-x: -100%;
+}
+.player_proc_2 {
+    background-position-x: -200%;
+}
+.player_proc_3 {
+    background-position-x: -300%;
+}
+.player_proc_4 {
+    background-position-x: -400%;
+}
+.player_proc_5 {
+    background-position-x: -500%;
+}
+.player_proc_6 {
+    background-position-x: -600%;
+}
+.player_proc_7 {
+    background-position-x: -700%;
+}
+.player_proc_8 {
+    background-position-x: -800%;
+}
+
+.playername {
+    position: absolute;
+    color: #fff;
+    font-family: Arial,sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    z-index: 6;
+}
