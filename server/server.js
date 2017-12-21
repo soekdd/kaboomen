@@ -160,6 +160,11 @@ function checkSystemHealthy() {
 	};
 }
 
+function jsonResponse(response, err, data) {
+	response.setHeader('content-type', 'application/json');
+	myResponse(response, err, data)
+}
+
 function myResponse(response, err, data) {
 	response.statusCode = err.code;
 	response.statusMessage = err.message;
@@ -257,25 +262,25 @@ function handleRequest(request, response) {
 			return;
 		}
 		if (params[1] == 'map') {
-			myResponse(response, err, game.getGroundMapStringified());
+			jsonResponse(response, err, game.getGroundMapStringified());
 			return;
 		}
 		if (params[1] == 'simple') {
-			myResponse(response, err, game.getGameStringifiedSimple());
+			jsonResponse(response, err, game.getGameStringifiedSimple());
 			return;
 		}
 		if (params[1] == 'extended') {
 			if (params[2] < game.getRev()) {
-				myResponse(response, err, game.getGameStringifiedExtended());
+				jsonResponse(response, err, game.getGameStringifiedExtended());
 			}
 			else {
-				myResponse(response, err);
+				jsonResponse(response, err);
 			}
 			return;
 		}
 		if (params[1] == 'standard') {
 			if (params[2] < game.getRev()) {
-				myResponse(response, err, game.getGameStringifiedStandard());
+				jsonResponse(response, err, game.getGameStringifiedStandard());
 			}
 			else {
 				myResponse(response, err);
