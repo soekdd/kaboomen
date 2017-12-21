@@ -244,6 +244,28 @@ Example (static map)
      [532,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,516,524]
     ],"width":29,"height":19}
 
+| Nr. | Image                                                                                                   | Name              |
+|-----|---------------------------------------------------------------------------------------------------------|-------------------|
+| 4   | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/FLOOR_1.png)           | FLOOR_1           |
+| 8   | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/FLOOR_2.png)           | FLOOR_2           |
+| 12  |                                                                                                         | FLOOR_3           |
+| 16  | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/FLOOR_4.png)           | FLOOR_4           |
+| 20  | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/FLOOR_5.png)           | FLOOR_5           |
+|     |                                                                                                         |                   |
+| 512 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL.png)              | WALL              |
+| 516 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_LEFT_RIGHT.png)   | WALL_LEFT_RIGHT   |
+| 520 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_TOP_BOTTOM.png)   | WALL_TOP_BOTTOM   |
+| 524 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_TOP_LEFT.png)     | WALL_TOP_LEFT     |
+| 528 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_BOTTOM_RIGHT.png) | WALL_BOTTOM_RIGHT |
+| 532 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_TOP_RIGHT.png)    | WALL_TOP_RIGHT    |
+| 536 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_BOTTOM_LEFT.png)  | WALL_BOTTOM_LEFT  |
+| 540 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_TOP.png)          | WALL_TOP          |
+| 544 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_BOTTOM.png)       | WALL_BOTTOM       |
+| 548 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_RIGHT.png)        | WALL_RIGHT        |
+| 552 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_LEFT.png)         | WALL_LEFT         |
+| 556 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_SPECIAL_1.png)    | WALL_SPECIAL_1    |
+| 560 | ![couldn't be loaded](https://kaboomen-soek.c9users.io/tools/docs/map_icons_66px/WALL_SPECIAL_2.png)    | WALL_SPECIAL_2    |
+
 ## usage of server based AI bot
 
 ### start AI bot
