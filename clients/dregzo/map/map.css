@@ -1,0 +1,91 @@
+#map {
+    position: absolute;
+}
+
+.tile {
+    background-image: url(map.png);
+    background-size: 1600%, 200%;
+    position: absolute;
+    z-index: 0;
+    background-position-y: -100%;
+}
+
+.wall {
+    background-image: url(map.png);
+    background-size: 1600%, 200%;
+    position: absolute;
+    z-index: 0;
+    background-position-y: 0%;
+}
+
+.tile01 {
+    background-position-x: 0%;
+}
+
+.tile02 {
+    background-position-x: -100%;
+}
+
+.wall0000 {
+    background-position-x: 0%;
+}
+
+.wall1000 {
+    background-position-x: -100%;
+}
+
+.wall0100 {
+    background-position-x: -200%;
+}
+
+.wall0010 {
+    background-position-x: -300%;
+}
+
+.wall0001 {
+    background-position-x: -400%;
+}
+
+.wall1010 {
+    background-position-x: -500%;
+}
+
+.wall0101 {
+    background-position-x: -600%;
+}
+
+.wall1100 {
+    background-position-x: -700%;
+}
+
+.wall0110 {
+    background-position-x: -800%;
+}
+
+.wall0011 {
+    background-position-x: -900%;
+}
+
+.wall1001 {
+    background-position-x: -1000%;
+}
+
+.wall1110 {
+    background-position-x: -1100%;
+}
+
+.wall0111 {
+    background-position-x: -1200%;
+}
+
+.wall1011 {
+    background-position-x: -1300%;
+}
+
+.wall1101 {
+    background-position-x: -1400%;
+}
+
+.wall1111 {
+    background-position-x: -1500%;
+}

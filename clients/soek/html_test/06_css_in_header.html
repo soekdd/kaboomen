@@ -1,32 +1,9 @@
 <html>
     <head>
-       <script type="text/javascript" src="common_lib/js/jquery.js"></script>
-       <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
+       <script type="text/javascript" src="../common_lib/js/jquery.js"></script>
+       <script type="text/javascript" src="../common_lib/js/kaboomen_consts.js"></script>
        <style>
-           table{ border-spacing:0}
-           td {border:0px solid black;}
-           .map{
-               width: 32px;
-               height: 32px;
-           }
-           .mapFloor, .mapGoodie{
-               background-color: DarkGreen;
-           }
-           .mapWall{
-               background-color: Gray;
-           }
-           .mapBox1, .mapBox2, .mapBox3{
-               background-color: SaddleBrown;
-           }
-           .mapBomb{
-              background-image: url("img/bomb.gif");
-           }
-           .mapExplosion{
-               background-image: url("img/explosion.png");
-           }
-           .mapPlayer{
-               background-image: url("img/character_positioned.png");
-           }
+           td {border:1px solid black;}
        </style>
        <script>
            /*global c,$*/
@@ -36,7 +13,7 @@
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     s += '<tr>';
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) {
-                        s += '<td id="'+zeile+'_'+spalte+'">';
+                        s += '<td class="spalte" id="'+zeile+'_'+spalte+'">';
                         s += '</td>';
                     }
                     s += '</tr>';     
@@ -58,10 +35,9 @@
                $.getJSON('http://kaboomen.de:8082/standard/'+lastRev,datenErhalten);
            }
            var datenErhalten = function(spiel){
-               
-               /*for(var i=0;i<spiel.map[0].length;i++) {
-                   var element = spiel.map[0][i];
-               }*/
+               if (lastRev==0) {
+                   $('html > head').append('<style>.spalte{width:calc((100%-50px)/'+spiel.width+')}</style>');
+               }
                var s = "";
                for(key in spiel.men) {
                    s += spiel.men[key].name+ "&nbsp;";
@@ -70,8 +46,7 @@
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
                     {
-                      document.getElementById(zeile+'_'+spalte).setAttribute("class","map "+c.getClassOfTileSimple(spiel.map[zeile][spalte]));
-                      
+                      document.getElementById(zeile+'_'+spalte).innerHTML=c.getClassOfTile(spiel.map[zeile][spalte]);
                     }
                }
            }

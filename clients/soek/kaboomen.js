@@ -407,7 +407,7 @@ function checkForSound(game) {
 
 function cleanupPlayers(game) {
     if (Object.keys(game.men).length != oldPlayers) {
-        $(".men").each(function() {
+        $(".men").each(function() { 
             var id = $(this).attr('id').substr(3);
             if (!(id in game.men)) {
                 $("#man" + id).remove();

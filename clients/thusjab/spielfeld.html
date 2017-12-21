@@ -5,13 +5,16 @@
         <script type="text/javascript" src="common_lib/js/jquery.js"></script>
 	    <script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
         <style>
-            #spielfeld {position:relative;}
-            .pic {position:absolute;}
-            .tile {}
-            .wall {}
-            .ch1 {}
-            .ch2 {background:url(alles.png)}
-            .ch3 {}
+            #spielfeld {position:relative;width:1856px;height:1216px;}
+            .pic {display:box;position:absolute;background-image: url("alles.png"); background-size: 400% 200%; background-position: -300% 0%; width:64px; height:64px;}
+            .mapFloor {background-position: 0% -100%}
+            .mapWall {background-position: -100% -100%;}
+            .mapBox1 {background-position: 0% 0%;}
+            .mapBox2 {background-position: -100% 0%;}
+            .mapBox3 {background-position: -200% 0%;}
+            .mapBomb {background-position: -200% -100%;}
+            .mapPlayer {background-position: -300% -100%;}
+            /*https://res.cloudinary.com/teepublic/image/private/s--LZYTUwNc--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1458943301/production/designs/458361_1.jpg*/
         </style>
         <script>
             var lastRev = 0;
@@ -20,7 +23,7 @@
                 var s = '';
                 for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++) {
                     for (var spalte = 0; spalte < c.SET_WIDTH; spalte++){
-                        s += '<div id="'+zeile+'_'+spalte+'" class="pic" style="top:'+zeile*64+'px; left:'+spalte*64+'px"></div>';
+                        s += '<div id="'+zeile+'_'+spalte+'" style="top:'+zeile*64+'px; left:'+spalte*64+'px"></div>';
                     }
                 }
                 $('#spielfeld').html(s);
@@ -28,12 +31,12 @@
                 setInterval(refresh,100);
             };             var refresh = function(){
                 $.getJSON('http://kaboomen.de:8082/standard/'+lastRev, datenErhalten);
-            }
+            };
             var datenErhalten = function(spiel){
                 lastRev = spiel.rev;
                 for (var zeile = 0; zeile < c.SET_HEIGHT; zeile++){
                     for (var spalte = 0; spalte < c.SET_WIDTH; spalte++){
-                        document.getElementById(zeile+'_'+spalte).innerHTML=spiel.map[zeile][spalte];
+                        document.getElementById(zeile+'_'+spalte).setAttribute("class","pic "+c.getClassOfTileSimple(spiel.map[zeile][spalte]));
                     }
                 }
             };
@@ -41,6 +44,11 @@
         </script>
     </head>
     <body>
-        <div id="spielfeld"></div>
+        <div style="width: 100%" align="center">
+            <div style="width: 70%">
+                <div id="spielfeld" ></div>
+            </div>
+            
+        </div>
     </body>
-</html>
+</html> 
