@@ -1,8 +1,5 @@
 /*global c,$,app*/
 
-//remove men, create new men and fed them with attributes
-//remove destroyed boxes
-
 var serverNum = '8082';
 var sizeX = 32;
 var sizeY = 32;
@@ -13,6 +10,8 @@ var menNum = 0;
 var oldMenNum = 0;
 var playerIDs = new Array(0);
 var oldPlayerIDs = new Array(0);
+var playingPlayerID = null;
+var authID = null;
 
 function start() {
     $.get('http://kaboomen.de:' + serverNum +'/map/', createBackground);
@@ -51,24 +50,20 @@ function renderBox(lives, x , y) {
 	if (lives > 0) {
 		$('#tile_' + x + '_' + y).attr('class', 'box');
 		$('#tile_' + x + '_' + y).css('background-position-x', '-' + ((lives - 1) * 100) + '%');
+	}else {
+		$('#tile_' + x + '_' + y).css('background-position-x', '-300%');
 	}
 }
 
 function renderMen(menIn) {
 	if (menIn == '' || menIn == null) return;
-	var men = JSON.parse(menIn);
-	oldMenNum = menNum;
-	menNum = men.length;
-	oldPlayerIDs = playerIDs;
-	playerIDs = new Array(0);
+	var men = menIn;
+	$('#men').empty();
+	var menStr = '';
 	for (var man in men) {
-	    if (men.hasOwnProperty(man)) {
-	        playerIDs.push(man.id);
-	    }
+		menStr += '<div id="man_' + men[man].id + '" class="man" style="top:' + (men[man].y * sizeY) + 'px;left:' + (men[man].x * sizeX) + 'px;width:' + sizeX + 'px;height:' + sizeY + 'px;position:absolute;background-position-y:' + (800 + (men[man].look*100)) + '%;"></div>';
 	}
-	if (oldPlayerIDs != playerIDs) {
-		
-	}
+	$('#men').html(menStr);
 }
 
 function createBackground(mapIn) {
@@ -153,6 +148,20 @@ function createBackground(mapIn) {
 	}
 	$('#map').html(s);
 	$('#map').append(tile);
+}
+
+function login() {
+	var playerName = $('#formName').val();
+	if (playerName == null || playerName == '') return;
+	$.ajax({
+		url:'http://kaboomen.de:' + serverNum + "/create/" + playerName,
+		success:gotLoginData
+	});
+}
+
+function gotLoginData(data) {
+	[authID,playingPlayerID] = data.split(';');
+	alert(authID);
 }
 
 $(document).ready(start);

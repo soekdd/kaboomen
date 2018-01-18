@@ -2,14 +2,18 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<script src="src/redirectToHTTP.js"></script>
+		<title>pitizzle extended</title>
+		<link rel="icon" href="src/favicon.svg" type="image/svg+xml">
+		<link rel="shortcut icon" href="src/favicon.png" type="image/png">
+		<script src="ext_scripts/redirectToHTTP.js"></script>
 		<script type="text/javascript" src="common_lib/js/jquery.js"></script>
 		<script type="text/javascript" src="common_lib/js/kaboomen_consts.js"></script>
 		<script src="extended.js"></script>
+		<script src="ext_scripts/getExtendedClassOfTile.js"></script>
 		<link rel="stylesheet" type="text/css" href="extended.css">
 	</head>
 	<body style="margin: 0px;">
 		<div id="spielfeld"></div>
-		<h1 style="text-align: center;">Remove 'https://' !</h1>
+		<div id="login"><input id="login_input" type="text" placeholder="Nickname"/><button onclick="login()">Login</button></div>
 	</body>
 </html>

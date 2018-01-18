@@ -1,3 +1,18 @@
+.map{
+    position: relative;
+    top: 20px;
+}
+
+.men{
+    position: relative;
+    top: 20px;
+}
+
+.man{
+    background-size: 1300% 2100%;
+    background-image: url('images/char.png');
+}
+
 .bg{
 	background-size: 1300% 100%;
 	background-image: url('images/bg.png');
@@ -6,7 +21,7 @@
 }
 
 .box{
-    background-size: 300% 100%;
+    background-size: 400% 100%;
     background-image: url('images/boxes.png');
     transform: none;
     background-position-y: -0%;

@@ -101,7 +101,9 @@
 	exports.EXTMAP_FILTER_TILETYPE = 0x3C;  //00111100
 
 	exports.FOLDER_LEVEL = 'level';
-
+	
+	exports.KEYCODES = { 37: 'left', 39: 'right', 38: 'up', 40: 'down', 32: 'bomb' };
+	
 	exports.GOOD_GOODIES = [exports.FILTER_GOODIE | exports.GOODIE_REMOTEBOMB, exports.FILTER_GOODIE | exports.GOODIE_STRONGBOMB, exports.FILTER_GOODIE | exports.GOODIE_INDESTRUCTIBLE, exports.FILTER_GOODIE | exports.GOODIE_MORE_EXPL, exports.FILTER_GOODIE | exports.GOODIE_MORE_BOMB, exports.FILTER_GOODIE | exports.GOODIE_MORE_SPEED];
 	exports.BAD_GOODIES = [exports.FILTER_GOODIE | exports.GOODIE_LESS_EXPL, exports.FILTER_GOODIE | exports.GOODIE_LESS_BOMB, exports.FILTER_GOODIE | exports.GOODIE_LESS_SPEED];
 	//exports.DESTROYABLE = [exports.FILTER_GOODIE | exports.GOODIE_REMOTEBOMB, exports.FILTER_GOODIE | exports.GOODIE_STRONGBOMB, exports.MAP_BOX, exports.FILTER_GOODIE | exports.GOODIE_INDESTRUCTIBLE, exports.FILTER_GOODIE | exports.GOODIE_MORE_EXPL, exports.FILTER_GOODIE | exports.GOODIE_LESS_EXPL, exports.FILTER_GOODIE | exports.GOODIE_MORE_BOMB, exports.FILTER_GOODIE | exports.GOODIE_LESS_BOMB, exports.FILTER_GOODIE | exports.GOODIE_MORE_SPEED, exports.FILTER_GOODIE | exports.GOODIE_LESS_SPEED];
@@ -146,8 +148,17 @@
 	exports.isUndestroyable = function(e) {
 		return e == exports.MAP_WALL;
 	};
-	
-	exports.getClassOfTile = function(tile) {
+	exports.getClassOfTileStandard = function(tile) {
+		if (tile==exports.MAP_FLOOR) return 'mapFloor';
+		if (tile==exports.MAP_WALL) return 'mapWall';
+		if (exports.isBox(tile)) return 'mapBox'+(tile - exports.FILTER_BOX); 
+		if (tile==exports.ITEM_BOMB) return 'mapBomb';
+		if (exports.isGoodie(tile)) return 'mapGoodie goodie'+exports.GOODIES_EXPLAINED[tile];
+		if (exports.isExplosion(tile)) return 'mapExplosion explosion'+exports.BOMB_EXPLAINED[tile]; 
+		if (exports.isPlayer(tile)) return 'mapFloor'; 
+		return 'mapUnknown';
+	};
+	exports.getClassOfTileSimple = function(tile) {
 		if (tile==exports.MAP_FLOOR) return 'mapFloor';
 		if (tile==exports.MAP_WALL) return 'mapWall';
 		if (exports.isBox(tile)) return 'mapBox'+(tile - exports.FILTER_BOX); 
@@ -157,5 +168,5 @@
 		if (exports.isPlayer(tile)) return 'mapPlayer player'+(tile - exports.FILTER_PLAYER); 
 		return 'mapUnknown';
 	}
-
+	
 })(typeof exports === 'undefined' ? this['c'] = {} : exports);

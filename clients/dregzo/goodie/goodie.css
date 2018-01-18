@@ -1,12 +1,12 @@
 #goodies {
     position: absolute;
+    z-index: 1;
 }
 
 .goodie {
-    background-image: url(http://kaboomen.de/soek/img/goodie.png);
-    background-size: 1000%, 100%;
+    background-image: url(goodie3.png);
+    background-size: 900%, 100%;
     position: absolute;
-    z-index: 1;
     background-position-y: 0%;
 }
 

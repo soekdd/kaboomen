@@ -14,7 +14,7 @@ body {
 .wall {
     width:33px;
     height:33px;
-    background: url(../soek/img/ground.png);
+    background: url(../../clients/soek/img/ground.png);
     background-position:0px 0px;
     background-size:2000%;
 }
@@ -60,7 +60,7 @@ body {
 .ground {
     width:33px;
     height:33px;
-    background: url(../soek/img/ground.png);
+    background: url(../../clients/soek/img/ground.png);
     background-position-y:33px;
     background-position:0px 33px;
     background-size:2000%;

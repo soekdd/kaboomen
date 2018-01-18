@@ -53,7 +53,7 @@ the difficulty of the APIs to the age of the students.
 1. Login by **ws(s)://server:port/create/[playersName]** **([try](http://kaboomen.de:8081/create/testPlayer))**
 2. Getting response as comma seperated list: **[authId],[playerID]**
 3. Store both values in global variables
-4. Sending commands to server **http(s)://server:port/[playerID]/[left|right|up|down|bomb]**   
+4. Sending commands to server **http(s)://server:port/[authId]/[left|right|up|down|bomb]**   
 
 ### simple API
 

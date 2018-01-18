@@ -29,9 +29,11 @@ function mapreceived (json) {
 function encode (jsonid) {
     switch (jsonid) {
         case 8:
+            //return 'wall empty';
             return 'tile tile01';
         case 16:
-            return 'tile tile02';
+            //return 'wall empty';
+            return 'tile tile01';
         case 512:
             return 'wall wall1111';
         case 516:

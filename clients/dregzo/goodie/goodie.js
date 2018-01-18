@@ -1,9 +1,4 @@
-function goodiesetup () {
-    /* global $,rev*/
-    $.getJSON('http://kaboomen.de:8081/extended/'+rev,goodiesloaded);
-}
-
-function goodiesloaded (json) {
+function goodiesetup (json) {
     /*global elsize*/
     var goodies = document.getElementsByClassName('goodie');
     for (var i = 0; i < goodies.length; i++) {
@@ -29,5 +24,4 @@ function goodiesloaded (json) {
             document.getElementById(id).style.top = (elsize*json.goodies[i].y)+'px';
         }
     }
-    rev = json.rev;
 }

@@ -1,21 +1,25 @@
 #map {
     position: absolute;
+    z-index: 0;
 }
 
 .tile {
-    background-image: url(map.png);
-    background-size: 1600%, 200%;
+    background-image: url(tile.png);
+    background-size: 200%, 100%;
     position: absolute;
-    z-index: 0;
-    background-position-y: -100%;
+    background-position-y: 0%;
 }
 
 .wall {
-    background-image: url(map.png);
-    background-size: 1600%, 200%;
+    background-image: url(wall.png);
+    background-size: 1700%, 100%;
     position: absolute;
     z-index: 0;
     background-position-y: 0%;
+}
+
+.empty {
+    background-position-x: -1600%;
 }
 
 .tile01 {

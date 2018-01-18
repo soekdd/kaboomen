@@ -6,17 +6,23 @@
            table{ border-spacing:0}
            td {border:0px solid black;}
            .map{
-               width: 32px;
+               width: 31px;
                height: 32px;
            }
-           .mapFloor, .mapGoodie{
-               background-color: DarkGreen;
+           .mapFloor{
+               background-image: url("img/grass.jpg");
            }
            .mapWall{
-               background-color: Gray;
+               background-image: url("img/wall.png");
            }
-           .mapBox1, .mapBox2, .mapBox3{
-               background-color: SaddleBrown;
+           .mapBox1{
+               background-image: url("img/kiste1.png");
+           }
+           .mapBox2{
+               background-image: url("img/kiste2.png");
+           }
+           .mapBox3{
+               background-image: url("img/kiste3.png");
            }
            .mapBomb{
               background-image: url("img/bomb.gif");
@@ -27,10 +33,69 @@
            .mapPlayer{
                background-image: url("img/character_positioned.png");
            }
+           .mapGoodie{
+               background-image : url("img/chest.png");
+           }
+           .maenner {
+                top:0px;
+                left:0px;
+                width:64px;
+                height:64px;
+                position: absolute;
+                background-image: url('img/char.png');
+                background-size: 1300% 2100%;
+            }
+            .oben {
+                background-position-y: -800%;
+            }
+            .links {
+                background-position-y: -900%;
+            }
+            .unten {
+                background-position-y: -1000%;
+            }
+            .rechts {
+                background-position-y: -1100%;
+            }
+            .beugen {
+                background-position-y: -2000%;
+            }
+            .jubeln {
+                background-position-y: -200%;
+            }
+            .drohen {
+                background-position-y: -1300%;
+            }
+            .a0 {
+                background-position-x: 0%;
+            }
+            .a1 {
+                background-position-x: -100%;
+            }
+            .a2 {
+                background-position-x: -200%;
+            }
+            .a3 {
+                background-position-x: -300%;
+            }
+            .a4 {
+                background-position-x: -400%;
+            }
+            .a5 {
+                background-position-x: -500%;
+            }
+            .a6 {
+                background-position-x: -600%;
+            }
+            .a7 {
+                background-position-x: -700%;
+            }
        </style>
        <script>
            /*global c,$*/
            var lastRev = 0;
+           var playerID = null;
+           var authID = null;
            var main = function(){
                var s = '';
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
@@ -56,9 +121,11 @@
            };
            var refresh = function(){
                $.getJSON('http://kaboomen.de:8082/standard/'+lastRev,datenErhalten);
-           }
+           };
            var datenErhalten = function(spiel){
-               
+               if (!(playerID in spiel.men)) {
+                   $('#login').show();
+               }
                /*for(var i=0;i<spiel.map[0].length;i++) {
                    var element = spiel.map[0][i];
                }*/
@@ -66,24 +133,61 @@
                for(key in spiel.men) {
                    s += spiel.men[key].name+ "&nbsp;";
                }
+               if (spiel.rev < lastRev) {
+                    return;
+                }; 
                lastRev = spiel.rev;
                for(var zeile = 0;zeile<c.SET_HEIGHT;zeile++) {
                     for(var spalte = 0;spalte<c.SET_WIDTH;spalte++) 
                     {
-                      document.getElementById(zeile+'_'+spalte).setAttribute("class","map "+c.getClassOfTileSimple(spiel.map[zeile][spalte]));
+                      document.getElementById(zeile+'_'+spalte).setAttribute("class","map "+c.getClassOfTileStandard(spiel.map[zeile][spalte]));
                       
                     }
                }
+           };
+           
+           var gotLoginData = function(data){
+                [authID,playerID]=data.split(',');
+                $('#login').hide();
+           };
+           
+           var login = function(){
+               var playerName = $('#formName').val();
+               if (playerName==null || playerName=='') return;
+               $.ajax({
+                    url:'http://kaboomen.de:8082/create/'+playerName,
+                    method:'GET',
+                    success:gotLoginData,
+               });
+           };
+           
+           var sendOrder = function(order) {
+               $.get('http://kaboomen.de:8082/'+authID+'/'+order);
            }
+           
+           var keyCode = function(event) {
+               var myKeyCodes = {37:'left',39:'right',38:'up',40:'down',32:'bomb'};
+               if (event.keyCode in myKeyCodes) {
+                   sendOrder(myKeyCodes[event.keyCode]);
+               }
+           }
+           
            $(document).ready(main);
        </script>
     </head>
-    <body>
+    <body onkeydown="keyCode(event)">
+        <div id="login">Spielname:&nbsp;<input id="formName" type="text"/><button onclick="login()" type="button" id="login">login</button></div>
         <table id="spielfeld">
             
         </table>
-        <div id="hilfsfeld">
+        <!-- <div id="hilfsfeld"> -->
             
-        </div>
+        <!-- </div> -->
+        <div id="oben" style="top:0px;left:0px;"></div>
+        <div id="unten" style="top:0px;left:66px;"></div>
+        <div id="links" style="top:0px;left:132px;"></div>
+        <div id="rechts" style="top:0px;left:198px;"></div>
+        <div id="die" style="top:0px;left:264px;"></div>
+        <div id="wait" style="top:0px;left:330px;"></div>
     </body>
 </html>

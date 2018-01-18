@@ -1,9 +1,13 @@
 /*embed stylesheet this way: <link rel="stylesheet" href="src">*/
+#players {
+    position: absolute;
+    z-index: 5;
+}
+
 .player {
     background-image: url(player.png);
     background-size: 900%, 500%;
     position: absolute;
-    z-index: 5;
 }
 .player_walk_2 {
     background-position-y: -0%;

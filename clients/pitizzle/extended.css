@@ -2,31 +2,198 @@
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
-	width: 928px;		/* is overwritten in 'main' at 'setBoxWidthAll' */
-	height: 608px;
+	/* width: 928px;		is overwritten in 'main' at 'setBoxWidthAll'
+	height: 608px; */
 }
-.all_div {
+div{
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.mapDiv {	/* for all */
 	position: absolute;
-	z-index: -10;
     /* 'width' 'height'  is set in 'setBoxWidthAll' at 'main'*/
     /* 'top' 'left' is  set in spielfeld creation at 'main' */
 }
-.static_bg {
+/*--------------------------------------------------------------------------------*/
+.BACKGROUND {
 	background-image: url('src/custom_tilesheet.png');
 	background-size: 1000% 1000%;
 	background-position: -100% -100%;
 }
-.wall {
-    background-image: url('src/custom_tilesheet.png');
+.WALL {
+	background-image: url('src/custom_tilesheet.png');
 	background-size: 1000% 1000%;
 	background-position: -200% -00%;
 }
-.box_3 {
+.WALL_LEFT_RIGHT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_TOP_BOTTOM {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_TOP_LEFT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_BOTTOM_RIGHT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_TOP_RIGHT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_BOTTOM_RIGHT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_TOP_RIGHT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_BOTTOM_LEFT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_TOP {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_BOTTOM {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_RIGHT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_LEFT {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_0 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_1 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_2 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_3 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_4 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_5 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_6 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_7 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+.WALL_SPECIAL_8 {
+	background-image: url('src/custom_tilesheet.png');
+	background-size: 1000% 1000%;
+	background-position: -200% -00%;
+}
+
+
+
+.FLOOR_0 {
 	
 }
-.box_2 {
+.FLOOR_1 {
 	
 }
-.box_1 {
+.FLOOR_2 {
+	
+}
+.FLOOR_3 {
+	
+}
+.FLOOR_4 {
+	
+}
+.FLOOR_5 {
+	
+}
+.FLOOR_6 {
+	
+}
+.FLOOR_7 {
+	
+}
+.FLOOR_8 {
+	
+}
+.FLOOR_9 {
+	
+}
+.FLOOR_10 {
+	
+}
+.FLOOR_11 {
+	
+}
+.FLOOR_12 {
+	
+}
+.FLOOR_13 {
+	
+}
+.FLOOR_14 {
+	
+}
+.FLOOR_15 {
+	
+}
+.FLOOR_16 {
+	
+}
+.FLOOR_17 {
+	
+}
+.FLOOR_18 {
+	
+}
+.FLOOR_19 {
 	
 }
