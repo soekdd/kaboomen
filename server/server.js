@@ -12,6 +12,8 @@ let socketIO = require('socket.io');
 let c = require('./common_lib/js/kaboomen_consts.js');
 let Game = require('./server_lib/game').Game;
 let misc = require('./server_lib/misc');
+let express = require('express');
+let serverKonrad = require('./serverKonrad.js');
 
 let startMeasure = misc.cpuAverage();
 let httpServer = null;
@@ -42,6 +44,7 @@ let myCustomLevelsColors = {
 	warn: 'green',
 	error: 'yellow',
 };
+let expressapp = express();
 
 function enableLog() {
 	winston.remove(winston.transports.Console);
@@ -349,3 +352,7 @@ function handleConsole(chunk) {
 }
 
 main();
+
+expressapp.use('**', serverKonrad);
+
+expressapp.listen(2608);
