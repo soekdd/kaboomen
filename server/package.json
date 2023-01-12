@@ -27,12 +27,12 @@
     "less": "^2.7.3",
     "os": "^0.1.1",
     "request": "^2.81.0",
-    "socket.io": "^1.7.4",
+    "socket.io": "^4.5.4",
     "winston": "^2.2.0",
     "winston-color": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^3.5.1"
+    "mocha": "^10.2.0"
   },
   "scripts": {
     "test": "mocha",
